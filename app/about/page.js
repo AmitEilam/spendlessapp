@@ -9,7 +9,7 @@ export const metadata = {
 export default function Page() {
   return (
     <div className='grid grid-cols-5 gap-x-24 gap-y-32 text-lg items-center'>
-      <div className='col-span-3'>
+      <div className='md:col-span-3 col-span-5'>
         <h1 className='text-4xl mb-10 text-purple-800 font-medium'>
           Managing Finances Today
         </h1>
@@ -33,15 +33,15 @@ export default function Page() {
         </div>
       </div>
 
-      <div className='col-span-2'>
+      <div className='md:col-span-2 md:block col-span-4 hidden'>
         <Image src={image2} alt='couple photo1' placeholder='blur' />
       </div>
 
-      <div className='relative aspect-square col-span-2'>
+      <div className='relative aspect-square md:col-span-2 col-span-4'>
         <Image src={image1} fill className='object-cover' alt='couple photo2' />
       </div>
 
-      <div className='col-span-3'>
+      <div className='md:col-span-3 col-span-5'>
         <h1 className='text-4xl mb-10 text-purple-800 font-medium'>
           What the App Offers
         </h1>
