@@ -1,6 +1,8 @@
 import Stats from '../_components/Stats';
 import Chart from '../_components/Chart';
 import { getTransactionsByUser } from '../_lib/data-service';
+import { Suspense } from 'react';
+import Spinner from '../_components/Spinner';
 
 export const revalidate = 0;
 

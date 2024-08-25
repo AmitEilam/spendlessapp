@@ -1,14 +1,9 @@
 'use client';
-import styled from 'styled-components';
 import {
   Bar,
   BarChart,
   CartesianGrid,
-  Cell,
   Legend,
-  Pie,
-  PieChart,
-  ReferenceLine,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -41,7 +36,6 @@ function Chart({ expense, income }) {
           <YAxis />
           <Tooltip />
           <Legend />
-          {/* <ReferenceLine y={3} stroke='#000' /> */}
           <Bar dataKey='expenses' fill='#D25653' />
           <Bar dataKey='income' fill='#80D27D' />
         </BarChart>
