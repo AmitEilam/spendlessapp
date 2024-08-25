@@ -10,7 +10,7 @@ export default function Home() {
         src={background}
         fill
         quality={90}
-        className='relative object-cover object-top blur-[2px]'
+        className='relative object-cover object-bottom blur-[2px]'
         alt='home-background'
       />
       <div className='relative z-10 text-center mt-20'>
