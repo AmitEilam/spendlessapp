@@ -5,8 +5,8 @@ export default function Navigation() {
   const pathname = usePathname();
 
   return (
-    <nav className='z-10 text-xl'>
-      <ul className='flex gap-16 items-center'>
+    <nav className='z-10 sm:text-sm md:text-base lg:text-lg xl:text-xl text-sm'>
+      <ul className='flex gap-7 items-center sm:gap-10 lg:gap-16'>
         <li>
           <Link
             className={`font-medium hover:text-purple-500 transition-colors ${
