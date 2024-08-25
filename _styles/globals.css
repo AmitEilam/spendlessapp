@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --expenses-color: #a98700;
+  --car-color: #008aa9;
+  --nightout-color: #6b00a9;
+  --food-color: #6b00a9;
+  --supermarket-color: #003ba9;
+}
