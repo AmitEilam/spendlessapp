@@ -5,7 +5,7 @@ import LogoWithoutText from '@/app/_components/LogoWithoutText';
 
 export default function Home() {
   return (
-    <main className='mt-24'>
+    <main className='mt-20'>
       <Image
         src={background}
         fill
