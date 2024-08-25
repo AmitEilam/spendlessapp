@@ -1,12 +1,17 @@
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function Navigation() {
+  const pathname = usePathname();
+
   return (
     <nav className='z-10 text-xl'>
       <ul className='flex gap-16 items-center'>
         <li>
           <Link
-            className='text-purple-800 font-medium hover:text-purple-500 transition-colors'
+            className={`font-medium hover:text-purple-500 transition-colors ${
+              pathname === '/dashboard' ? 'text-purple-600' : 'text-purple-800'
+            }`}
             href='/dashboard'
           >
             Dashboard
@@ -14,7 +19,11 @@ export default function Navigation() {
         </li>
         <li>
           <Link
-            className='text-purple-800 font-medium hover:text-purple-500 transition-colors'
+            className={`font-medium hover:text-purple-500 transition-colors ${
+              pathname === '/NewTransaction'
+                ? 'text-purple-600'
+                : 'text-purple-800'
+            }`}
             href='/NewTransaction'
           >
             New Transaction
@@ -22,7 +31,9 @@ export default function Navigation() {
         </li>
         <li>
           <Link
-            className='text-purple-800 font-medium hover:text-purple-500 transition-colors'
+            className={`text-purple-800 font-medium hover:text-purple-500 transition-colors ${
+              pathname === '/about' ? 'text-purple-600' : 'text-purple-800'
+            }`}
             href='/about'
           >
             About

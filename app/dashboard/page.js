@@ -24,14 +24,18 @@ export default async function Page() {
   return (
     <>
       <div className='mb-5'>
-        <h1 className='text-2xl font-bold'>Dashboard</h1>
+        <h1 className='text-xl font-bold'>Welcome, Amit</h1>
       </div>
       <div className='flex flex-col text-center'>
-        <h2>Expenses and income this month</h2>
+        <h2 className='font-medium'>Expenses and income this month</h2>
         <Chart expense={expense} income={income} />
-        <h2>Expense categories this month</h2>
+        <h2 className='font-medium text-red-800'>
+          Expense categories this month
+        </h2>
         <Stats data={transactions?.expense} type='expense' />
-        <h2>Incoming categories this month</h2>
+        <h2 className='font-medium text-green-800'>
+          Incoming categories this month
+        </h2>
         <Stats data={transactions?.income} type='income' />
       </div>
     </>
