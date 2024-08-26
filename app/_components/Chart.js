@@ -8,6 +8,7 @@ import {
   Tooltip,
   XAxis,
   YAxis,
+  LabelList,
 } from 'recharts';
 
 function Chart({ expense, income }) {
@@ -36,8 +37,12 @@ function Chart({ expense, income }) {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey='expenses' fill='#D25653' />
-          <Bar dataKey='income' fill='#80D27D' />
+          <Bar dataKey='expenses' fill='#D25653'>
+            <LabelList dataKey='expenses' position='center' fill='darkRed' />
+          </Bar>
+          <Bar dataKey='income' fill='#80D27D'>
+            <LabelList dataKey='income' position='center' fill='darkGreen' />
+          </Bar>
         </BarChart>
       </ResponsiveContainer>
     </div>
