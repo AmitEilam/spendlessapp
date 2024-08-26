@@ -2,8 +2,10 @@ import Image from 'next/image';
 import background from '@/public/background3.png';
 import Link from 'next/link';
 import LogoWithoutText from '@/app/_components/LogoWithoutText';
+import { auth } from './_lib/auth';
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth();
   return (
     <main className='mt-20'>
       <Image
@@ -28,7 +30,7 @@ export default function Home() {
           Start Today
         </Link>
         <Link
-          href='/'
+          href='/login'
           className='bg-purple-800 px-6 py-4 text-white text-lg font-semibold transition-all rounded-full'
         >
           Login
