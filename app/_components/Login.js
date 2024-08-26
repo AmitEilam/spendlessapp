@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import SignInGoogleButton from './SignInGoogleButton';
+import Spinner from './Spinner';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -17,7 +18,7 @@ function Login() {
   return (
     <div className='flex items-center justify-center mt-40'>
       <div className='w-full max-w-md bg-white shadow-md rounded p-5'>
-        <form>
+        <form onSubmit={handleSubmit}>
           <h2 className='text-2xl font-bold text-center text-gray-800 mb-10'>
             🐷 Welcome! 👋🏼 <br />
             Login to your account
