@@ -1,12 +1,12 @@
 import Image from 'next/image';
 import background from '@/public/background3.png';
-import Link from 'next/link';
 import LogoWithoutText from '@/app/_components/LogoWithoutText';
 import { auth } from './_lib/auth';
 import LinkItem from './_components/LinkItem';
 
 export default async function Home() {
   const session = await auth();
+
   return (
     <main className='mt-20'>
       <Image
