@@ -1,8 +1,7 @@
 'use client';
 
-import { Suspense, useState } from 'react';
+import { useState } from 'react';
 import SignInGoogleButton from './SignInGoogleButton';
-import Spinner from './Spinner';
 
 function Login() {
   const [email, setEmail] = useState('');

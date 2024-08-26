@@ -3,6 +3,7 @@ import background from '@/public/background3.png';
 import Link from 'next/link';
 import LogoWithoutText from '@/app/_components/LogoWithoutText';
 import { auth } from './_lib/auth';
+import LinkItem from './_components/LinkItem';
 
 export default async function Home() {
   const session = await auth();
@@ -23,18 +24,17 @@ export default async function Home() {
         <h3 className='text-md text-purple-800 mb-16 tracking-tight font-n'>
           Manage more, spend less.
         </h3>
-        <Link
-          href='/'
-          className='bg-purple-800 px-6 py-4 mr-8 text-white text-lg font-semibold transition-all rounded-full'
-        >
-          Start Today
-        </Link>
-        <Link
-          href='/login'
-          className='bg-purple-800 px-6 py-4 text-white text-lg font-semibold transition-all rounded-full'
-        >
-          Login
-        </Link>
+        {session ? (
+          <>
+            <LinkItem href='/dashboard' msg='Go to dashboard' />
+            <LinkItem href='/transactions' msg='Go to transactions' />
+          </>
+        ) : (
+          <>
+            <LinkItem href='/' msg='Start Today' />
+            <LinkItem href='/login' msg='Login' />
+          </>
+        )}
       </div>
     </main>
   );

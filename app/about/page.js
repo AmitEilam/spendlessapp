@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import image1 from '@/public/couple3-T.png';
 import image2 from '@/public/couple2-T.png';
+import LinkItem from '../_components/LinkItem';
 
 export const metadata = {
   title: 'About / SpendLess',
@@ -64,12 +65,8 @@ export default function Page() {
           </p>
         </div>
         <div className='mt-20'>
-          <a
-            href='/'
-            className='bg-purple-800 px-6 py-4 text-white text-lg font-semibold transition-all rounded-full'
-          >
-            Start Today
-          </a>
+          <LinkItem href='/' msg='Start Today' />
+          <LinkItem href='/login' msg='Login' />
         </div>
       </div>
     </div>
