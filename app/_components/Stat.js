@@ -38,7 +38,7 @@ function Stat({ title, value, type, category }) {
       iconCat = <GiMoneyStack />;
       bgColor = 'bg-green-300 text-green-700';
       break;
-    case 'transfer':
+    case 'transfers':
       iconCat = <TbArrowsTransferDown />;
       bgColor = 'bg-pink-300 text-pink-700';
       break;
@@ -48,10 +48,10 @@ function Stat({ title, value, type, category }) {
   }
 
   return (
-    <div className='w-40 h-50 flex flex-col items-center justify-between border p-4 text-center m-2 shadow-md'>
+    <div className='w-40 h-50 flex flex-col items-center justify-between border border-gray-200 p-4 text-center m-2 shadow-md'>
       <div className='flex flex-row items-center mb-4'>
         <div
-          className={`${bgColor} text-${iconCat} text-2xl rounded-full p-3 m-1`}
+          className={`${bgColor} text-${iconCat} text-2xl rounded-full p-2 m-1`}
         >
           {iconCat}
         </div>

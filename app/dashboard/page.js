@@ -1,8 +1,6 @@
 import Stats from '../_components/Stats';
 import Chart from '../_components/Chart';
 import { getTransactionsByUser } from '../_lib/data-service';
-import { Suspense } from 'react';
-import Spinner from '../_components/Spinner';
 import { auth } from '../_lib/auth';
 
 export const revalidate = 0;
@@ -13,15 +11,38 @@ export const metadata = {
 
 export default async function Page() {
   const session = await auth();
-  const transactions = await getTransactionsByUser(1);
-  const expense = Object.values(transactions?.expense).reduce(
-    (acc, curr) => acc + curr,
-    0
-  );
-  const income = Object.values(transactions?.income).reduce(
-    (acc, curr) => acc + curr,
-    0
-  );
+  const transactions = await getTransactionsByUser(session.user.id);
+  let expense = 'a';
+  let income = 'b';
+
+  if (transactions?.expense && transactions?.income) {
+    expense = Object?.values(transactions?.expense).reduce(
+      (acc, curr) => acc + curr,
+      0
+    );
+    income = Object?.values(transactions?.income).reduce(
+      (acc, curr) => acc + curr,
+      0
+    );
+  } else if (transactions?.expense && !transactions?.income) {
+    expense = Object?.values(transactions?.expense).reduce(
+      (acc, curr) => acc + curr,
+      0
+    );
+  } else if (transactions?.income && !transactions?.expense) {
+    income = Object?.values(transactions?.income).reduce(
+      (acc, curr) => acc + curr,
+      0
+    );
+  } else {
+    return (
+      <div className='mb-5'>
+        <h2 className='text-xl font-bold'>
+          Something went wrong! You don't have any transaction yet. 🧐
+        </h2>
+      </div>
+    );
+  }
 
   return (
     <>

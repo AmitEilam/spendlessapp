@@ -11,7 +11,7 @@ export default async function Page() {
     <>
       <div className='mb-5'>
         <h1 className='text-2xl font-bold'>
-          Welcome, {session.user.name.split(' ')[0]}
+          Welcome, {session.user?.name.split(' ')[0]}
         </h1>
       </div>
       <SignOutButton />

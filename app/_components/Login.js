@@ -2,17 +2,18 @@
 
 import { useState } from 'react';
 import SignInGoogleButton from './SignInGoogleButton';
+import { signInRegularAction } from '../_lib/actions';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  console.log(email, password);
 
-  function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) return;
-    console.log(email, password);
-  }
+
+    signInRegularAction(email, password);
+  };
 
   return (
     <div className='flex items-center justify-center mt-40'>

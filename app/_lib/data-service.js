@@ -51,3 +51,14 @@ export async function getUser(email) {
   // No error here! We handle the possibility of no guest in the sign in callback
   return data;
 }
+
+export async function createUser(newGuest) {
+  const { data, error } = await supabase.from('users').insert([newGuest]);
+
+  if (error) {
+    console.error(error);
+    throw new Error('Guest could not be created');
+  }
+
+  return data;
+}

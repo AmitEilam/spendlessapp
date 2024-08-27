@@ -37,7 +37,9 @@ export default async function Navigation() {
           ) : (
             <CgProfile className='m-1' />
           )}
-          <span>{session?.user?.name ? session.user.name : 'Profile'}</span>
+          <span>
+            {session?.user?.name ? session.user.name.split(' ')[0] : 'Profile'}
+          </span>
         </NavigationItem>
       </ul>
     </nav>
