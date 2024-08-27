@@ -38,7 +38,7 @@ export default async function Page() {
     return (
       <div className='mb-5'>
         <h2 className='text-xl font-bold'>
-          Something went wrong! You don't have any transaction yet. 🧐
+          Something went wrong! You don&apos;t have any transaction yet. 🧐
         </h2>
       </div>
     );
