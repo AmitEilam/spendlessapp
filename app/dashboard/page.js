@@ -1,7 +1,8 @@
 import Stats from '../_components/Stats';
 import Chart from '../_components/Chart';
-import { getTransactionsByUser } from '../_lib/data-service';
+
 import { auth } from '../_lib/auth';
+import { getSumTransactionsByUser } from '../_lib/data-service';
 
 export const revalidate = 0;
 
@@ -11,9 +12,9 @@ export const metadata = {
 
 export default async function Page() {
   const session = await auth();
-  const transactions = await getTransactionsByUser(session.user.id);
-  let expense = 'a';
-  let income = 'b';
+  const transactions = await getSumTransactionsByUser(session.user.id);
+  let expense = '';
+  let income = '';
 
   if (transactions?.expense && transactions?.income) {
     expense = Object?.values(transactions?.expense).reduce(

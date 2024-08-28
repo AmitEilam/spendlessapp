@@ -13,19 +13,50 @@
     animation: rotate 1s infinite linear;
   }
 
-  .spinner-mini {
-    margin: 0;
-    width: 20px;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    border: 2px solid theme('colors.purple.200');
-    border-right-color: transparent;
-    animation: rotate 1s infinite linear;
+  .fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  .inner-border-left {
+    position: relative;
+    padding-left: 1rem;
+  }
+
+  .inner-border-left::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background-color: transparent;
+    z-index: 1;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+  }
+
+  .inner-border-green::before {
+    background-color: #15803d;
+  }
+
+  .inner-border-red::before {
+    background-color: #b91c1c;
   }
 
   @keyframes rotate {
     to {
       transform: rotate(1turn);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 }

@@ -1,3 +1,4 @@
+import NotFound from '../not-found';
 import { supabase } from './supabase';
 
 export async function getTransactions() {
@@ -11,7 +12,7 @@ export async function getTransactions() {
   return data;
 }
 
-export async function getTransactionsByUser(id) {
+export async function getSumTransactionsByUser(id) {
   const { data, error } = await supabase
     .from('transactions')
     .select('*')
@@ -19,7 +20,7 @@ export async function getTransactionsByUser(id) {
 
   if (error) {
     console.error(error);
-    notFound();
+    NotFound();
   }
 
   const result = data.reduce((acc, data) => {
@@ -39,6 +40,21 @@ export async function getTransactionsByUser(id) {
   }, {});
 
   return result;
+}
+
+export async function getTransactionsByUser(id) {
+  const { data, error } = await supabase
+    .from('transactions')
+    .select('*')
+    .eq('userId', id)
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error(error);
+    NotFound();
+  }
+
+  return data;
 }
 
 export async function getUser(email) {
