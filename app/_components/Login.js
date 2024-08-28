@@ -52,7 +52,7 @@ function Login() {
           <div className='flex items-center justify-center'>
             <button
               type='submit'
-              className='bg-purple-800 px-6 py-4 text-white text-lg font-semibold transition-all rounded-full'
+              className='bg-purple-800 px-5 py-3 text-white text-lg font-semibold transition-all rounded-full'
             >
               Login
             </button>
