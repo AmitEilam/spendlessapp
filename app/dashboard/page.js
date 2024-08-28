@@ -59,7 +59,7 @@ export default async function Page() {
           Expense categories this month
         </h2>
         <Stats data={transactions?.expense} type='expense' />
-        <h2 className='font-medium text-green-800'>
+        <h2 className='font-medium text-green-800 mt-10'>
           Incoming categories this month
         </h2>
         <Stats data={transactions?.income} type='income' />

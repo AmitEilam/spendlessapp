@@ -11,7 +11,7 @@ export default async function Navigation() {
 
   return (
     <nav className='z-10 sm:text-sm md:text-base lg:text-lg xl:text-xl text-sm'>
-      <ul className='flex gap-7 items-center sm:gap-10 lg:gap-16'>
+      <ul className='flex gap-5 items-center sm:gap-10 lg:gap-16'>
         {session ? (
           <>
             <NavigationItem href={'/dashboard'} name='Dashboard'>

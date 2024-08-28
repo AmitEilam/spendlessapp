@@ -24,17 +24,19 @@ export default async function Home() {
         <h3 className='text-md text-purple-800 mb-16 tracking-tight font-n'>
           Manage more, spend less.
         </h3>
-        {session ? (
-          <>
-            <LinkItem href='/dashboard' msg='Go to dashboard' />
-            <LinkItem href='/transactions' msg='Go to transactions' />
-          </>
-        ) : (
-          <>
-            <LinkItem href='/' msg='Start Today' />
-            <LinkItem href='/login' msg='Login' />
-          </>
-        )}
+        <div className='flex flex-wrap justify-center'>
+          {session ? (
+            <>
+              <LinkItem href='/dashboard' msg='Go to dashboard' />
+              <LinkItem href='/transactions' msg='Go to transactions' />
+            </>
+          ) : (
+            <>
+              <LinkItem href='/' msg='Start Today' />
+              <LinkItem href='/login' msg='Login' />
+            </>
+          )}
+        </div>
       </div>
     </main>
   );

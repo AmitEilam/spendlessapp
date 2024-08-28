@@ -48,8 +48,8 @@ function Stat({ title, value, type, category }) {
   }
 
   return (
-    <div className='w-40 h-50 flex flex-col items-center justify-between border border-gray-200 p-4 text-center m-2 shadow-md'>
-      <div className='flex flex-row items-center mb-4'>
+    <div className='flex flex-col bg-white shadow-md rounded-lg p-6 m-6 w-[230px] my-4 border border-gray-200 inner-border-left transition-transform transform  hover:shadow-lg fade-in'>
+      <div className='flex items-center justify-center'>
         <div
           className={`${bgColor} text-${iconCat} text-2xl rounded-full p-2 m-1`}
         >

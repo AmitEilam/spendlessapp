@@ -3,7 +3,7 @@ import Stat from './Stat';
 function Stats({ data, type }) {
   const dataArray = Object.entries(data);
   return (
-    <div className='flex flex-wrap justify-center mb-12 mt-2'>
+    <div className='flex flex-wrap justify-center'>
       {dataArray.map(([category, amount]) => (
         <Stat
           key={category + amount}
