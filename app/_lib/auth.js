@@ -17,11 +17,10 @@ const authConfig = {
       },
       async authorize(credentials) {
         const user = await getUser(credentials.email);
-        console.log('user', user);
         if (user && user.password === credentials.password) {
           return user;
         } else {
-          return null;
+          throw new Error('Invalid email or password');
         }
       },
     }),

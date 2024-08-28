@@ -7,12 +7,17 @@ import { signInRegularAction } from '../_lib/actions';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [err, setErr] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) return;
-
-    signInRegularAction(email, password);
+    try {
+      setErr('');
+      await signInRegularAction(email, password);
+    } catch (error) {
+      setErr('*Invalid email or password 🧐');
+    }
   };
 
   return (
@@ -42,6 +47,7 @@ function Login() {
               onChange={(e) => setPassword(e.target.value)}
               className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
             />
+            <p className='text-red-700 text-center'>{err}</p>
           </div>
           <div className='flex items-center justify-center'>
             <button
