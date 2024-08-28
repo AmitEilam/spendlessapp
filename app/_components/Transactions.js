@@ -24,8 +24,9 @@ async function Transactions({ filter }) {
       {displayTransactions.map((e) => (
         <Transaction
           category={e.category}
-          amount={e.amount}
+          price={e.price}
           type={e.type}
+          date={e.created_at}
           key={e.id}
         />
       ))}

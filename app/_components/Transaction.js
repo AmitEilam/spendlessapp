@@ -3,8 +3,10 @@ import { FaCar } from 'react-icons/fa';
 import { GiMoneyStack, GiPartyPopper } from 'react-icons/gi';
 import { MdFastfood, MdRestaurant } from 'react-icons/md';
 import { TbArrowsTransferDown } from 'react-icons/tb';
+import { format } from 'date-fns';
 
-function Transaction({ category, amount, type }) {
+function Transaction({ category, price, type, date }) {
+  const formattedDate = format(date, 'dd.MM.yy');
   let bgColor;
   let iconCat;
   let borderColor;
@@ -24,7 +26,7 @@ function Transaction({ category, amount, type }) {
       iconCat = <FaCar />;
       bgColor = 'bg-blue-300 text-blue-800';
       break;
-    case 'restaurants':
+    case 'restaurant':
       iconCat = <MdRestaurant />;
       bgColor = 'bg-orange-300 text-orange-800';
       break;
@@ -40,7 +42,7 @@ function Transaction({ category, amount, type }) {
       iconCat = <GiMoneyStack />;
       bgColor = 'bg-green-300 text-green-800';
       break;
-    case 'transfers':
+    case 'transfer':
       iconCat = <TbArrowsTransferDown />;
       bgColor = 'bg-pink-300 text-pink-800';
       break;
@@ -60,7 +62,8 @@ function Transaction({ category, amount, type }) {
         >
           {iconCat}
         </div>
-        <h1 className='text-xl font-semibold  ml-1'>{category}</h1>
+        <h1 className='text-xl font-semibold  ml-1'>{category} - </h1>
+        <p className='text-gray-500 ml-2 text-sm'>{formattedDate}</p>
       </div>
       <h1
         className={`text-2xl mt-1.5 font-semibold ${
@@ -68,8 +71,8 @@ function Transaction({ category, amount, type }) {
         }`}
       >
         {type === 'income'
-          ? amount.toLocaleString('en-US')
-          : '-' + amount.toLocaleString('en-US')}
+          ? price.toLocaleString('en-US')
+          : '-' + price.toLocaleString('en-US')}
         &#8362;
       </h1>
     </div>

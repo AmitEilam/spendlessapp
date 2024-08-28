@@ -4,11 +4,11 @@ function Stats({ data, type }) {
   const dataArray = Object.entries(data);
   return (
     <div className='flex flex-wrap justify-center'>
-      {dataArray.map(([category, amount]) => (
+      {dataArray.map(([category, price]) => (
         <Stat
-          key={category + amount}
+          key={category + price}
           title={category}
-          value={amount}
+          value={price}
           type={type}
           category={category}
         />

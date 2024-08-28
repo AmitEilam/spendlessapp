@@ -24,7 +24,7 @@ export async function getSumTransactionsByUser(id) {
   }
 
   const result = data.reduce((acc, data) => {
-    const { category, type, amount } = data;
+    const { category, type, price } = data;
 
     if (!acc[type]) {
       acc[type] = {};
@@ -34,7 +34,7 @@ export async function getSumTransactionsByUser(id) {
       acc[type][category] = 0;
     }
 
-    acc[type][category] += amount;
+    acc[type][category] += price;
 
     return acc;
   }, {});

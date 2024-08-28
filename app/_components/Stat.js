@@ -22,7 +22,8 @@ function Stat({ title, value, type, category }) {
       iconCat = <FaCar />;
       bgColor = 'bg-blue-300 text-blue-800';
       break;
-    case 'restaurants':
+    case 'restaurant':
+      title = 'restaurants';
       iconCat = <MdRestaurant />;
       bgColor = 'bg-orange-300 text-orange-800';
       break;
@@ -38,7 +39,8 @@ function Stat({ title, value, type, category }) {
       iconCat = <GiMoneyStack />;
       bgColor = 'bg-green-300 text-green-800';
       break;
-    case 'transfers':
+    case 'transfer':
+      title = 'transfers';
       iconCat = <TbArrowsTransferDown />;
       bgColor = 'bg-pink-300 text-pink-800';
       break;
