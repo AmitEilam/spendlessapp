@@ -38,10 +38,20 @@ function Chart({ expense, income }) {
           <Tooltip />
           <Legend />
           <Bar dataKey='expenses' fill='#D25653'>
-            <LabelList dataKey='expenses' position='center' fill='darkRed' />
+            <LabelList
+              dataKey='expenses'
+              position='center'
+              fill='darkRed'
+              style={{ fontSize: '12px' }}
+            />
           </Bar>
           <Bar dataKey='income' fill='#80D27D'>
-            <LabelList dataKey='income' position='center' fill='darkGreen' />
+            <LabelList
+              dataKey='income'
+              position='center'
+              fill='darkGreen'
+              style={{ fontSize: '12px' }}
+            />
           </Bar>
         </BarChart>
       </ResponsiveContainer>
