@@ -8,7 +8,7 @@ export default async function Home() {
   const session = await auth();
 
   return (
-    <main className='mt-20'>
+    <div className='mt-20 flex justify-center items-center'>
       <Image
         src={background}
         fill
@@ -38,6 +38,6 @@ export default async function Home() {
           )}
         </div>
       </div>
-    </main>
+    </div>
   );
 }
