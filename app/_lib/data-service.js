@@ -57,6 +57,21 @@ export async function getTransactionsByUser(id) {
   return data;
 }
 
+export async function getTransactionsByUserAndFiler(id, filter) {
+  const { data, error } = await supabase
+    .from('transactions')
+    .select('*')
+    .eq('userId', id)
+    .order(filter, { ascending: false });
+
+  if (error) {
+    console.error(error);
+    NotFound();
+  }
+
+  return data;
+}
+
 export async function getUser(email) {
   const { data, error } = await supabase
     .from('users')

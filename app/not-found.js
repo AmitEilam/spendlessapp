@@ -6,7 +6,10 @@ function NotFound() {
       <h1 className='text-3xl font-semibold'>
         This page could not be found 😥
       </h1>
-      <Link href='/' className='inline-block text-purple-800 px-6 py-3 text-lg'>
+      <Link
+        href='/'
+        className='inline-block text-primary-800 px-6 py-3 text-lg'
+      >
         Go back home
       </Link>
     </main>

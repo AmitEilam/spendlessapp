@@ -8,7 +8,7 @@
     width: 60px;
     aspect-ratio: 1;
     border-radius: 50%;
-    border: 8px solid theme('colors.purple.900');
+    border: 8px solid theme('colors.primary.800');
     border-right-color: theme('colors.purple.500');
     animation: rotate 1s infinite linear;
   }
@@ -62,9 +62,5 @@
 }
 
 :root {
-  --expenses-color: #a98700;
-  --car-color: #008aa9;
-  --nightout-color: #6b00a9;
-  --food-color: #6b00a9;
-  --supermarket-color: #003ba9;
+  --primary-color: #6b21a8;
 }

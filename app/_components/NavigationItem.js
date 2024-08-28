@@ -9,7 +9,9 @@ function NavigationItem({ href, name, children }) {
     <li>
       <Link
         className={`flex items-center font-medium transition-colors ${
-          isActive ? 'text-purple-600' : 'text-purple-800 hover:text-purple-500'
+          isActive
+            ? 'text-purple-600'
+            : 'text-primary-800 hover:text-purple-500'
         }`}
         href={href}
       >

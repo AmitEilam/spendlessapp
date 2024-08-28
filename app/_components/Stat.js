@@ -20,30 +20,30 @@ function Stat({ title, value, type, category }) {
       break;
     case 'car':
       iconCat = <FaCar />;
-      bgColor = 'bg-blue-300 text-blue-700';
+      bgColor = 'bg-blue-300 text-blue-800';
       break;
     case 'restaurants':
       iconCat = <MdRestaurant />;
-      bgColor = 'bg-orange-300 text-orange-700';
+      bgColor = 'bg-orange-300 text-orange-800';
       break;
     case 'nightout':
       iconCat = <GiPartyPopper />;
-      bgColor = 'bg-purple-300 text-purple-700';
+      bgColor = 'bg-purple-300 text-primary-800';
       break;
     case 'supermarket':
       iconCat = <MdFastfood />;
-      bgColor = 'bg-yellow-300 text-yellow-700';
+      bgColor = 'bg-yellow-300 text-yellow-800';
       break;
     case 'salary':
       iconCat = <GiMoneyStack />;
-      bgColor = 'bg-green-300 text-green-700';
+      bgColor = 'bg-green-300 text-green-800';
       break;
     case 'transfers':
       iconCat = <TbArrowsTransferDown />;
-      bgColor = 'bg-pink-300 text-pink-700';
+      bgColor = 'bg-pink-300 text-pink-800';
       break;
     default:
-      iconCat = 'bg-purple-300 text-purple-700';
+      iconCat = 'bg-purple-300 text-primary-800';
       break;
   }
 
@@ -59,11 +59,11 @@ function Stat({ title, value, type, category }) {
       </div>
       {type === 'expense' ? (
         <div className='font-medium text-2xl text-red-700 mt-3'>
-          -{value}&#8362;
+          -{value.toLocaleString('en-US')}&#8362;
         </div>
       ) : (
         <div className='font-medium text-2xl text-green-700 mt-3'>
-          {value}&#8362;
+          {value.toLocaleString('en-US')}&#8362;
         </div>
       )}
     </div>

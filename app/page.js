@@ -18,10 +18,10 @@ export default async function Home() {
       />
       <div className='relative z-10 text-center mt-20'>
         <LogoWithoutText />
-        <h1 className='text-6xl text-purple-800 mb-2 mt-1 tracking-tight font-n'>
+        <h1 className='text-6xl text-primary-800 mb-2 mt-1 tracking-tight font-n'>
           SpendLess
         </h1>
-        <h3 className='text-md text-purple-800 mb-16 tracking-tight font-n'>
+        <h3 className='text-md text-primary-800 mb-16 tracking-tight font-n'>
           Manage more, spend less.
         </h3>
         <div className='flex flex-wrap justify-center'>

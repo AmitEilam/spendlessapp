@@ -1,30 +1,24 @@
-import Transaction from '../_components/Transaction';
-import { auth } from '../_lib/auth';
-import { getTransactionsByUser } from '../_lib/data-service';
+import { Suspense } from 'react';
+import Filter from '../_components/Filter';
+import Transactions from '../_components/Transactions';
+import Spinner from '../_components/Spinner';
 
 export const metadata = {
   title: 'Transactions / SpendLess',
 };
 
-export default async function Page() {
-  const session = await auth();
-  const incomes = await getTransactionsByUser(session.user.id);
+export default async function Page({ searchParams }) {
+  const filter = searchParams?.filter ?? 'all';
 
   return (
     <>
       <div className='mb-5'>
         <h1 className='text-2xl font-bold'>Transactions</h1>
       </div>
-      <div>
-        {incomes.map((e) => (
-          <Transaction
-            category={e.category}
-            amount={e.amount}
-            type={e.type}
-            key={e.id}
-          />
-        ))}
-      </div>
+      <Filter />
+      <Suspense fallback={<Spinner />} key={filter}>
+        <Transactions filter={filter} />
+      </Suspense>
     </>
   );
 }
