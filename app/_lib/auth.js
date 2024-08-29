@@ -36,8 +36,8 @@ const authConfig = {
         if (!existingUser)
           await createUser({
             email: user.email,
-            first_name: profile?.given_name || '',
-            last_name: profile?.family_name || '',
+            firstName: profile?.given_name || '',
+            lastName: profile?.family_name || '',
             password: user.password,
           });
 
@@ -49,7 +49,7 @@ const authConfig = {
     async session({ session, user }) {
       const guest = await getUser(session.user.email);
       session.user.id = guest.id;
-      session.user.name = guest.first_name + ' ' + guest.last_name;
+      session.user.name = guest.firstName + ' ' + guest.lastame;
       return session;
     },
   },

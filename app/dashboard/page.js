@@ -15,7 +15,6 @@ export default async function Page() {
   const transactions = await getSumTransactionsByUser(session.user.id);
   let expense = '';
   let income = '';
-
   if (transactions?.expense && transactions?.income) {
     expense = Object?.values(transactions?.expense).reduce(
       (acc, curr) => acc + curr,
@@ -56,9 +55,17 @@ export default async function Page() {
         <h2 className='font-medium'>Expenses and income</h2>
         <Chart expense={expense} income={income} />
         <h2 className='font-medium text-red-800'>Expenses by Category</h2>
-        <Stats data={transactions?.expense} type='expense' />
+        {transactions?.expense ? (
+          <Stats data={transactions?.expense} type='expense' />
+        ) : (
+          'You dont have any expenses yet 👏🏻'
+        )}
         <h2 className='font-medium text-green-800 mt-10'>Income by Category</h2>
-        <Stats data={transactions?.income} type='income' />
+        {transactions?.income ? (
+          <Stats data={transactions?.income} type='income' />
+        ) : (
+          'You dont have any Income yet 🤨'
+        )}
       </div>
     </>
   );

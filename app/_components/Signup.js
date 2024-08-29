@@ -2,21 +2,33 @@
 
 import { useState } from 'react';
 import SignInGoogleButton from './SignInGoogleButton';
-import { signInRegularAction } from '../_lib/actions';
+import { createUser } from '../_lib/data-service';
+import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
-function Login() {
+function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [err, setErr] = useState('');
+
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!email || !password) return;
+    if (!email || !password || !firstName || !lastName) return;
     try {
       setErr('');
-      await signInRegularAction(email, password);
+      await createUser({ email, password, firstName, lastName });
+      setFirstName('');
+      setLastName('');
+      setPassword('');
+      setEmail('');
+      router.push('/login');
+      toast.success('Welcome! Now login with your details 🐷');
     } catch (error) {
-      setErr('*Invalid email or password 🧐');
+      setErr('*Somthing went wrong! 🧐');
     }
   };
 
@@ -26,7 +38,7 @@ function Login() {
         <form onSubmit={handleSubmit}>
           <h2 className='text-2xl font-bold text-center text-gray-800 mb-10'>
             🐷 Welcome! 👋🏼 <br />
-            Login to your account
+            Sign up for free now
           </h2>
           <div className='mb-4'>
             <label>Email:</label>
@@ -38,7 +50,7 @@ function Login() {
               className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
             />
           </div>
-          <div className='mb-6'>
+          <div className='mb-4'>
             <label>Password:</label>
             <input
               type='password'
@@ -49,12 +61,34 @@ function Login() {
             />
             <p className='text-red-700 text-center'>{err}</p>
           </div>
+          <div className='mb-4'>
+            <label>First name:</label>
+            <input
+              type='text'
+              placeholder='Type here ...'
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
+            />
+            <p className='text-red-700 text-center'>{err}</p>
+          </div>
+          <div className='mb-6'>
+            <label>Last name:</label>
+            <input
+              type='text'
+              placeholder='Type here ...'
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
+            />
+            <p className='text-red-700 text-center'>{err}</p>
+          </div>
           <div className='flex items-center justify-center'>
             <button
               type='submit'
               className='bg-primary-800 px-5 py-3 text-white text-lg font-semibold transition-all rounded-full'
             >
-              Login
+              Sign up
             </button>
           </div>
           <div className='flex items-center justify-center mt-8 mb-4'>
@@ -71,4 +105,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Signup;

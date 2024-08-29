@@ -5,7 +5,7 @@ import {
   GiMoneyStack,
 } from 'react-icons/gi';
 import { MdRestaurant, MdFastfood } from 'react-icons/md';
-import { FaCar } from 'react-icons/fa';
+import { FaCar, FaHome } from 'react-icons/fa';
 import { CiMoneyCheck1 } from 'react-icons/ci';
 import { TbArrowsTransferDown } from 'react-icons/tb';
 
@@ -44,6 +44,11 @@ function Stat({ title, value, type, category }) {
       iconCat = <TbArrowsTransferDown />;
       bgColor = 'bg-pink-300 text-pink-800';
       break;
+    case 'rent':
+      title = 'rent';
+      iconCat = <FaHome />;
+      bgColor = 'bg-cyan-300 text-cyan-800';
+      break;
     default:
       iconCat = 'bg-purple-300 text-primary-800';
       break;
@@ -57,7 +62,7 @@ function Stat({ title, value, type, category }) {
         >
           {iconCat}
         </div>
-        <div>{title}</div>
+        <div className='font-semibold'>{title}</div>
       </div>
       {type === 'expense' ? (
         <div className='font-medium text-2xl text-red-700 mt-3'>

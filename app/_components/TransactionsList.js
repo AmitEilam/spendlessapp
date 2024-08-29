@@ -1,11 +1,9 @@
-import { auth } from '../_lib/auth';
+import { deleteTransaction } from '../_lib/actions';
 import { getTransactionsByUser } from '../_lib/data-service';
 import Transaction from './Transaction';
 
-async function Transactions({ filter }) {
-  const session = await auth();
-  const transactions = await getTransactionsByUser(session.user.id);
-
+async function TransactionsList({ filter, user }) {
+  const transactions = await getTransactionsByUser(user);
   if (!transactions.length) return null;
 
   let displayTransactions;
@@ -26,7 +24,7 @@ async function Transactions({ filter }) {
           category={e.category}
           price={e.price}
           type={e.type}
-          date={e.created_at}
+          id={e.id}
           key={e.id}
         />
       ))}
@@ -34,4 +32,4 @@ async function Transactions({ filter }) {
   );
 }
 
-export default Transactions;
+export default TransactionsList;

@@ -88,7 +88,20 @@ export async function createUser(newGuest) {
 
   if (error) {
     console.error(error);
-    throw new Error('Guest could not be created');
+    throw new Error('User could not be created');
+  }
+
+  return data;
+}
+
+export async function createTransaction(userId, type, category, price, notes) {
+  const { data, error } = await supabase
+    .from('transactions')
+    .insert([{ userId, type, category, price, notes }]);
+
+  if (error) {
+    console.error(error);
+    throw new Error('User could not be created');
   }
 
   return data;

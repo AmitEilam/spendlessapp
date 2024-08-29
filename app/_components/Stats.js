@@ -1,6 +1,8 @@
 import Stat from './Stat';
 
 function Stats({ data, type }) {
+  if (!data || !type) return;
+
   const dataArray = Object.entries(data);
   return (
     <div className='flex flex-wrap justify-center'>

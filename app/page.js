@@ -8,7 +8,7 @@ export default async function Home() {
   const session = await auth();
 
   return (
-    <div className='mt-20 flex justify-center items-center'>
+    <div className='mt-10 flex justify-center items-center'>
       <Image
         src={background}
         fill
@@ -16,7 +16,7 @@ export default async function Home() {
         className='relative object-cover object-bottom blur-[2px]'
         alt='home-background'
       />
-      <div className='relative z-10 text-center mt-20'>
+      <div className='relative z-10 text-center mt-10'>
         <LogoWithoutText />
         <h1 className='text-6xl text-primary-800 mb-2 mt-1 tracking-tight font-n'>
           SpendLess
@@ -32,7 +32,7 @@ export default async function Home() {
             </>
           ) : (
             <>
-              <LinkItem href='/' msg='Start Today' />
+              <LinkItem href='/signup' msg='Start Today' />
               <LinkItem href='/login' msg='Login' />
             </>
           )}
