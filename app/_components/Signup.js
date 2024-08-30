@@ -5,8 +5,6 @@ import SignInGoogleButton from './SignInGoogleButton';
 import { createUser } from '../_lib/data-service';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
-import FormInput from './FormInput';
-import { RiEyeCloseFill, RiEyeCloseLine } from 'react-icons/ri';
 
 function Signup() {
   const [email, setEmail] = useState('');
@@ -14,12 +12,8 @@ function Signup() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [err, setErr] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const router = useRouter();
 
-  const togglePasswordVisibility = () => {
-    setShowPassword((prev) => !prev);
-  };
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,59 +36,50 @@ function Signup() {
     <div className='flex items-center justify-center mt-10'>
       <div className='w-full max-w-md bg-white shadow-md rounded p-5'>
         <form onSubmit={handleSubmit}>
-          <h2 className='text-2xl font-bold text-center text-gray-800 mb-10'>
+          <h2 className='sm:text-2xl font-bold text-center text-gray-800 mb-10'>
             🐷 Welcome! 👋🏼 <br />
             Sign up for free now
           </h2>
           <div className='mb-4'>
-            <FormInput
-              label='Email:'
+            <label>Email:</label>
+            <input
               type='email'
+              placeholder='expample@example.com'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required={true}
+              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
             />
           </div>
-          <div className='relative mb-4'>
+          <div className='mb-4'>
             <label>Password:</label>
             <input
-              type={showPassword ? 'text' : 'password'}
+              type='password'
               placeholder='Use strong password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
-              required
             />
-            <button
-              type='button'
-              onClick={togglePasswordVisibility}
-              className='absolute inset-y-0 right-0 flex items-center px-3 mt-3'
-            >
-              {showPassword ? (
-                <RiEyeCloseLine className='h-5 w-5 text-gray-400' />
-              ) : (
-                <RiEyeCloseFill className='h-5 w-5 text-gray-400' />
-              )}
-            </button>
             <p className='text-red-700 text-center'>{err}</p>
           </div>
           <div className='mb-4'>
-            <FormInput
-              label='First name:'
+            <label>First name:</label>
+            <input
               type='text'
+              placeholder='Type here ...'
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
-              required={true}
+              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
             />
             <p className='text-red-700 text-center'>{err}</p>
           </div>
           <div className='mb-6'>
-            <FormInput
-              label='Last name:'
+            <label>Last name:</label>
+            <input
               type='text'
+              placeholder='Type here ...'
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
-              required={true}
+              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
             />
             <p className='text-red-700 text-center'>{err}</p>
           </div>
