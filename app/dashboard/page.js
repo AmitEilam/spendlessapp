@@ -7,7 +7,6 @@ import {
   getSumTransactionsByUser,
 } from '../_lib/data-service';
 import { redirect } from 'next/navigation';
-import Msg from '../_components/msg';
 import MessageToUser from '../_components/MessageToUser';
 
 export const revalidate = 0;
