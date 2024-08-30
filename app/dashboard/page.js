@@ -2,7 +2,12 @@ import Stats from '../_components/Stats';
 import Chart from '../_components/Chart';
 
 import { auth } from '../_lib/auth';
-import { getSumTransactionsByUser } from '../_lib/data-service';
+import {
+  getSumFixedByUser,
+  getSumTransactionsByUser,
+} from '../_lib/data-service';
+import { redirect } from 'next/navigation';
+import Msg from '../_components/msg';
 
 export const revalidate = 0;
 
@@ -13,8 +18,24 @@ export const metadata = {
 export default async function Page() {
   const session = await auth();
   const transactions = await getSumTransactionsByUser(session.user.id);
+  const fixed = await getSumFixedByUser(session.user.id);
   let expense = '';
   let income = '';
+  let fixedExpense = '';
+  let fixedIncome = '';
+
+  if (fixed?.expense)
+    fixedExpense = Object?.values(fixed?.expense).reduce(
+      (acc, curr) => acc + curr,
+      0
+    );
+
+  if (fixed?.income)
+    fixedIncome = Object?.values(fixed?.income).reduce(
+      (acc, curr) => acc + curr,
+      0
+    );
+
   if (transactions?.expense && transactions?.income) {
     expense = Object?.values(transactions?.expense).reduce(
       (acc, curr) => acc + curr,
@@ -34,14 +55,8 @@ export default async function Page() {
       (acc, curr) => acc + curr,
       0
     );
-  } else {
-    return (
-      <div className='mb-5'>
-        <h2 className='text-xl font-bold'>
-          Something went wrong! You don&apos;t have any transaction yet. 🧐
-        </h2>
-      </div>
-    );
+  } else if (!fixed?.expense && !fixed?.income) {
+    redirect('/newAccount');
   }
 
   return (
@@ -53,18 +68,31 @@ export default async function Page() {
       </div>
       <div className='flex flex-col text-center'>
         <h2 className='font-medium'>Expenses and income</h2>
-        <Chart expense={expense} income={income} />
+        <Chart
+          expense={expense}
+          income={income}
+          fixedExpense={fixedExpense}
+          fixedIncome={fixedIncome}
+        />
         <h2 className='font-medium text-red-800'>Expenses by Category</h2>
-        {transactions?.expense ? (
-          <Stats data={transactions?.expense} type='expense' />
+        {transactions?.expense || fixed?.expense ? (
+          <Stats
+            data={transactions?.expense}
+            fixed={fixed?.expense}
+            type='expense'
+          />
         ) : (
-          'You dont have any expenses yet 👏🏻'
+          <Msg>You dont have any expenses yet 👏🏻</Msg>
         )}
         <h2 className='font-medium text-green-800 mt-10'>Income by Category</h2>
-        {transactions?.income ? (
-          <Stats data={transactions?.income} type='income' />
+        {transactions?.income || fixed?.income ? (
+          <Stats
+            data={transactions?.income}
+            fixed={fixed?.income}
+            type='income'
+          />
         ) : (
-          'You dont have any Income yet 🤨'
+          <Msg>You dont have any Income yet 🤨</Msg>
         )}
       </div>
     </>

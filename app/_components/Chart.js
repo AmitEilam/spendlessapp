@@ -11,12 +11,12 @@ import {
   LabelList,
 } from 'recharts';
 
-function Chart({ expense, income }) {
+function Chart({ expense, income, fixedExpense, fixedIncome }) {
   const data = [
     {
       name: 'Expenses and Income',
-      income: income,
-      expenses: -expense,
+      income: income + fixedIncome,
+      expenses: -(expense + fixedExpense),
     },
   ];
 

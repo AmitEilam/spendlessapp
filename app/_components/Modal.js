@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { createTransaction } from '../_lib/data-service';
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 function Modal({ modalRef, toggleModal, user }) {
+  const router = useRouter();
   const [type, setType] = useState('');
   const [category, setCategory] = useState('');
   const [price, setPrice] = useState('');
@@ -11,7 +13,7 @@ function Modal({ modalRef, toggleModal, user }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!type || !category || !price || !notes) return;
+    if (!type || !category || !price) return;
     try {
       setErr('');
       await createTransaction(user, type, category, price, notes);
@@ -22,6 +24,7 @@ function Modal({ modalRef, toggleModal, user }) {
       setErr('*Invalid email or password 🧐');
       console.log(err);
     }
+    router.refresh();
   };
 
   return (

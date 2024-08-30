@@ -1,20 +1,48 @@
 import Stat from './Stat';
 
-function Stats({ data, type }) {
-  if (!data || !type) return;
+function Stats({ data, fixed, type }) {
+  if ((!data || !type) && !fixed) return;
 
-  const dataArray = Object.entries(data);
+  let fixedArray = '';
+  if (fixed) {
+    fixedArray = Object.entries(fixed);
+  }
+
+  let dataArray = '';
+  if (data) {
+    dataArray = Object.entries(data);
+  }
+
   return (
     <div className='flex flex-wrap justify-center'>
-      {dataArray.map(([category, price]) => (
-        <Stat
-          key={category + price}
-          title={category}
-          value={price}
-          type={type}
-          category={category}
-        />
-      ))}
+      {data
+        ? dataArray.map(([category, price]) =>
+            price > 0 ? (
+              <Stat
+                key={category + price}
+                value={price}
+                type={type}
+                category={category}
+              />
+            ) : (
+              ''
+            )
+          )
+        : ''}
+      {fixed
+        ? fixedArray.map(([category, price]) =>
+            price > 0 ? (
+              <Stat
+                key={category + price}
+                value={price}
+                type={type}
+                category={category}
+              />
+            ) : (
+              ''
+            )
+          )
+        : ''}
     </div>
   );
 }

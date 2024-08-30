@@ -33,7 +33,7 @@ function Signup() {
   };
 
   return (
-    <div className='flex items-center justify-center mt-20'>
+    <div className='flex items-center justify-center mt-10'>
       <div className='w-full max-w-md bg-white shadow-md rounded p-5'>
         <form onSubmit={handleSubmit}>
           <h2 className='text-2xl font-bold text-center text-gray-800 mb-10'>

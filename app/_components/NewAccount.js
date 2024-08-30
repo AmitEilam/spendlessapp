@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { createTransaction } from '../_lib/data-service';
+import { createFixed } from '../_lib/data-service';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 
@@ -17,14 +17,9 @@ function NewAccount({ user }) {
     try {
       setErr('');
       if (currentExpenses)
-        await createTransaction(
-          user,
-          'expense',
-          'current expenses',
-          currentExpenses
-        );
-      if (salary) await createTransaction(user, 'income', 'salary', salary);
-      if (rent) await createTransaction(user, 'expense', 'rent', rent);
+        await createFixed(user, 'expense', 'current expenses', currentExpenses);
+      if (salary) await createFixed(user, 'income', 'salary', salary);
+      if (rent) await createFixed(user, 'expense', 'rent', rent);
       setSalary('');
       setRent('');
       setCurrentExpenses('');

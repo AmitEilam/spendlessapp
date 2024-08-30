@@ -5,6 +5,7 @@ import { RiInformation2Line } from 'react-icons/ri';
 import { CgProfile } from 'react-icons/cg';
 import { auth } from '../_lib/auth';
 import NavigationItem from './NavigationItem';
+import SignOutButton from './SignOutButton';
 
 export default async function Navigation() {
   const session = await auth();
@@ -41,6 +42,7 @@ export default async function Navigation() {
             {session?.user?.name ? session.user.name.split(' ')[0] : 'Profile'}
           </span>
         </NavigationItem>
+        <li>{session ? <SignOutButton /> : ''}</li>
       </ul>
     </nav>
   );

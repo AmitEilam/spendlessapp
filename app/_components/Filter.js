@@ -32,11 +32,11 @@ function Filter() {
           Expenses
         </FilterBtn>
         <FilterBtn
-          filter='incomes'
+          filter='income'
           handleFilter={handleFilter}
           activeFilter={activeFilter}
         >
-          Incomes
+          Income
         </FilterBtn>
       </div>
     </div>
