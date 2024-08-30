@@ -1,4 +1,14 @@
+import { GiPartyPopper, GiMoneyStack } from 'react-icons/gi';
+import { MdRestaurant, MdFastfood } from 'react-icons/md';
+import { FaCar, FaHome } from 'react-icons/fa';
+import { CiMoneyCheck1 } from 'react-icons/ci';
+import { TbArrowsTransferDown } from 'react-icons/tb';
+
 export function handlerCategory(category) {
+  let title = category;
+  let iconCat = '';
+  let bgColor = '';
+
   switch (category) {
     case 'currentExpenses':
       title = 'Current expenses';
@@ -41,7 +51,10 @@ export function handlerCategory(category) {
       bgColor = 'bg-cyan-300 text-cyan-800';
       break;
     default:
+      title = 'Unknown title';
       iconCat = 'bg-purple-300 text-primary-800';
+      bgColor = 'bg-white text-black';
       break;
   }
+  return { title, iconCat, bgColor };
 }

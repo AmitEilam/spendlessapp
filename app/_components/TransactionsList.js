@@ -1,5 +1,5 @@
 import { getTransactionsByUser } from '../_lib/data-service';
-import Msg from './msg';
+import MessageToUser from './MessageToUser';
 import Transaction from './Transaction';
 
 async function TransactionsList({ filter, user }) {
@@ -30,10 +30,10 @@ async function TransactionsList({ filter, user }) {
           />
         ))
       ) : (
-        <Msg>
+        <MessageToUser>
           There is no {filter} transactions yet{' '}
           {filter === 'income' ? '😥' : '😎'}
-        </Msg>
+        </MessageToUser>
       )}
     </div>
   );

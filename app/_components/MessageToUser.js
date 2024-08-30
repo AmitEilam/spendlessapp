@@ -1,4 +1,4 @@
-function Msg({ children }) {
+function MessageToUser({ children }) {
   return (
     <div className='flex flex-col justify-center items-center'>
       <p className='m-5 font-medium border p-7 bg-white rounded-xl shadow'>
@@ -8,4 +8,4 @@ function Msg({ children }) {
   );
 }
 
-export default Msg;
+export default MessageToUser;

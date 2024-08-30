@@ -8,6 +8,7 @@ import {
 } from '../_lib/data-service';
 import { redirect } from 'next/navigation';
 import Msg from '../_components/msg';
+import MessageToUser from '../_components/MessageToUser';
 
 export const revalidate = 0;
 
@@ -82,7 +83,7 @@ export default async function Page() {
             type='expense'
           />
         ) : (
-          <Msg>You dont have any expenses yet 👏🏻</Msg>
+          <MessageToUser>You dont have any expenses yet 👏🏻</MessageToUser>
         )}
         <h2 className='font-medium text-green-800 mt-10'>Income by Category</h2>
         {transactions?.income || fixed?.income ? (
@@ -92,7 +93,7 @@ export default async function Page() {
             type='income'
           />
         ) : (
-          <Msg>You dont have any Income yet 🤨</Msg>
+          <MessageToUser>You dont have any Income yet 🤨</MessageToUser>
         )}
       </div>
     </>
