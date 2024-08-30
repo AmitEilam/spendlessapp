@@ -5,7 +5,7 @@ import Spinner from '../_components/Spinner';
 import { auth } from '../_lib/auth';
 import AddTransaction from '../_components/AddTransaction';
 import { getTransactionsByUser } from '../_lib/data-service';
-import Msg from '../_components/msg';
+import MessageToUser from '../_components/MessageToUser';
 
 export const metadata = {
   title: 'Transactions / SpendLess',
@@ -34,7 +34,9 @@ export default async function Page({ searchParams }) {
         </>
       ) : (
         <div className='flex flex-col justify-center items-center'>
-          <Msg>There is not transactions yet, please add some 🐷</Msg>
+          <MessageToUser>
+            There is not transactions yet, please add some 🐷
+          </MessageToUser>
           <AddTransaction user={userId} />
         </div>
       )}
