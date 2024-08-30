@@ -11,7 +11,7 @@ export default async function Navigation() {
 
   return (
     <nav className='z-10 sm:text-sm md:text-base lg:text-lg xl:text-xl text-sm'>
-      <ul className='flex gap-5 items-center sm:gap-10 lg:gap-16'>
+      <ul className='flex gap-3 items-center sm:gap-10 lg:gap-16'>
         {session ? (
           <>
             <NavigationItem href={'/dashboard'} name='Dashboard'>
@@ -41,7 +41,9 @@ export default async function Navigation() {
             {session?.user?.name ? session.user.name.split(' ')[0] : 'Profile'}
           </span>
         </NavigationItem>
-        <li>{session ? <SignOutButton /> : ''}</li>
+        <li className='ml-7 -mr-3 sm:ml-0 sm:mr-0'>
+          {session ? <SignOutButton /> : ''}
+        </li>
       </ul>
     </nav>
   );

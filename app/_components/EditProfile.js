@@ -4,6 +4,7 @@ import { updateFixed, updateUser } from '../_lib/data-service';
 import toast from 'react-hot-toast';
 import { RiEyeCloseFill, RiEyeCloseLine } from 'react-icons/ri';
 import { useRouter } from 'next/navigation';
+import FormInput from './FormInput';
 
 function EditProfile({
   user,
@@ -51,97 +52,91 @@ function EditProfile({
   return (
     <div className='flex justify-center items-center'>
       <form onSubmit={submitHandler} className='border p-10 bg-white'>
-        <h2 className='text-2xl font-bold text-center text-gray-800 mb-10'>
+        <h2 className='sm:text-2xl font-bold text-center text-gray-800 mb-10'>
           ✍🏻 Edit your account details 🐷
         </h2>
         <div className='mb-4'>
-          <label>Your first name</label>
-          <input
+          <FormInput
+            label='Your first name'
             type='text'
-            placeholder='Type here ...'
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
-            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-            required
+            required={true}
           />
         </div>
         <div className='mb-4'>
-          <label>Your last name</label>
-          <input
+          <FormInput
+            label='Your last name'
             type='text'
-            placeholder='Type here ...'
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
-            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-            required
+            required={true}
           />
         </div>
         <div className='mb-4'>
-          <label>Your email</label>
-          <input
+          <FormInput
+            label='Your email'
             type='email'
-            placeholder='Type here ...'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-            required
+            required={true}
           />
         </div>
         <div className='relative mb-4'>
-          <label>Your password</label>
-          <input
-            type={showPassword ? 'text' : 'password'}
-            placeholder='Type here ...'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-10'
-            required
-          />
-          <button
-            type='button'
-            onClick={togglePasswordVisibility}
-            className='absolute inset-y-0 right-0 flex items-center px-3 mt-5'
-          >
-            {showPassword ? (
-              <RiEyeCloseLine className='h-5 w-5 text-gray-400' />
-            ) : (
-              <RiEyeCloseFill className='h-5 w-5 text-gray-400' />
-            )}
-          </button>
+          {password ? (
+            <>
+              {' '}
+              <label>Your password</label>
+              <input
+                type={showPassword ? 'text' : 'password'}
+                placeholder='Type here ...'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-10'
+                required
+              />
+              <button
+                type='button'
+                onClick={togglePasswordVisibility}
+                className='absolute inset-y-0 right-0 flex items-center px-3 mt-5'
+              >
+                {showPassword ? (
+                  <RiEyeCloseLine className='h-5 w-5 text-gray-400' />
+                ) : (
+                  <RiEyeCloseFill className='h-5 w-5 text-gray-400' />
+                )}
+              </button>
+            </>
+          ) : (
+            ''
+          )}
         </div>
         <div className='mb-4'>
-          <label>What is your regular income? (salary, etc.)</label>
-          <input
+          <FormInput
+            label='What is your regular income? (salary, etc.)'
             type='number'
-            placeholder='Type here ...'
             value={salary}
             onChange={(e) => setSalary(e.target.value)}
-            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-            required
+            required={true}
           />
         </div>
         <div className='mb-4'>
-          <label>What is the rent you pay? (if any. otherwise leave it)</label>
-          <input
+          <FormInput
+            label='What is the rent you pay? (if any. otherwise leave it)'
             type='number'
-            placeholder='Type here ...'
             value={rent}
             onChange={(e) => setRent(e.target.value)}
-            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            required={false}
           />
         </div>
         <div className='mb-6'>
-          <label>
-            What is your current expenses (electricity, water, gas, property
-            tax, internet, etc. )?
-          </label>
-          <input
+          <FormInput
+            label='What is your current expenses? (electricity, water, gas, property
+            tax, internet, etc.)'
             type='number'
-            placeholder='Type here ...'
             value={currentExpenses}
             onChange={(e) => setCurrentExpenses(e.target.value)}
-            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
-            required
+            required={true}
           />
           <p className='text-red-700 text-center'></p>
         </div>
