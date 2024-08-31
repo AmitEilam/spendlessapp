@@ -27,7 +27,7 @@ function NewAccount({ user }) {
       router.refresh();
       setTimeout(() => {
         router.push('/dashboard');
-      }, 300);
+      }, 500);
     } catch (error) {
       toast.error('Failed to add details! 💔');
       setErr('*Invalid details 🧐');
