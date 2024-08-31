@@ -24,14 +24,13 @@ function NewAccount({ user }) {
       setRent('');
       setCurrentExpenses('');
       toast.success('Your details successfully added! 🐷');
+      router.push('/dashboard');
       router.refresh();
     } catch (error) {
       toast.error('Failed to add details! 💔');
       setErr('*Invalid details 🧐');
       console.log(error);
-      router.refresh();
     }
-    router.push('/dashboard');
   };
 
   return (
