@@ -23,13 +23,13 @@ function NewAccount({ user }) {
       setSalary('');
       setRent('');
       setCurrentExpenses('');
-      router.push('/dashboard');
       toast.success('Your details successfully added! 🐷');
     } catch (error) {
       toast.error('Failed to add details! 💔');
       setErr('*Invalid details 🧐');
       console.log(error);
     }
+    router.push('/dashboard');
   };
 
   return (
