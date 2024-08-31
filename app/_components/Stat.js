@@ -10,7 +10,7 @@ function Stat({ value, type, category }) {
         >
           {iconCat}
         </div>
-        <div className='font-semibold'>{title}</div>
+        <div>{title}</div>
       </div>
       {type === 'expense' ? (
         <div className='font-medium text-2xl text-red-700 mt-3'>

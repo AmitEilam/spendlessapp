@@ -56,10 +56,10 @@ function Transaction({ category, price, type, date, notes, id }) {
           >
             {iconCat}
           </div>
-          <h1 className='text-xl font-semibold  ml-1'>{title}</h1>
+          <h1 className='text-xl ml-1'>{title}</h1>
         </div>
         <h1
-          className={`text-2xl mt-1.5 font-semibold ${
+          className={`text-2xl mt-1.5 ${
             type === 'income' ? 'text-green-700' : ' text-red-700'
           }`}
         >

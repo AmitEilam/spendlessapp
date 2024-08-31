@@ -1,19 +1,20 @@
 import { Toaster } from 'react-hot-toast';
 import '../_styles/globals.css';
 import Header from './_components/Header';
-import { Raleway } from 'next/font/google';
+import { NunitoSans } from 'next/font/google';
+import { Nunito } from 'next/font/google';
 
-const raleway = Raleway({ subsets: ['latin'], display: 'swap' });
-
-export const metadata = {
-  title: 'Welcome / SpendLess',
-};
+const nunito = Nunito({
+  subsets: ['latin'],
+  weight: ['400', '700'], // הוסף את המשקלים שאתה צריך
+  display: 'swap',
+});
 
 export default function RootLayout({ children }) {
   return (
     <html lang='en'>
       <body
-        className={`${raleway.className} antialiased bg-[#FAFAFA] text-primary-100 min-h-screen flex flex-col`}
+        className={`${nunito.className} antialiased bg-[#FAFAFA] text-black min-h-screen flex flex-col`}
       >
         <header>
           <Header />
