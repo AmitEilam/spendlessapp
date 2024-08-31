@@ -51,10 +51,12 @@ async function TransactionsList({ filter, user, timeFilter }) {
       {filteredTransactions.length ? (
         filteredTransactions.map((e) => (
           <Transaction
-            category={e.category}
-            price={e.price}
-            type={e.type}
-            id={e.id}
+            category={e?.category}
+            price={e?.price}
+            type={e?.type}
+            id={e?.id}
+            date={e?.created_at}
+            notes={e?.notes}
             key={e.id}
           />
         ))
