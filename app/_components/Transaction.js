@@ -15,7 +15,8 @@ function Transaction({ category, price, type, date, notes, id }) {
 
   const { title, iconCat, bgColor } = handlerCategory(category);
 
-  function deleteHandler() {
+  function deleteHandler(e) {
+    e.stopPropagation();
     if (confirm('Are you sure you want to delete this transaction?')) {
       try {
         deleteTransaction(id);
