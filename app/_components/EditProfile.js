@@ -57,7 +57,7 @@ function EditProfile({
   return (
     <div className='flex justify-center items-center'>
       <form onSubmit={submitHandler} className='border p-10 bg-white'>
-        <h2 className='text-2xl font-bold text-center text-gray-800 mb-10'>
+        <h2 className='sm:text-2xl font-bold text-center text-gray-800 mb-10'>
           ✍🏻 Edit your account details 🐷
         </h2>
         <div className='mb-4'>
@@ -82,39 +82,45 @@ function EditProfile({
             required
           />
         </div>
-        <div className='mb-4'>
-          <label>Your email</label>
-          <input
-            type='email'
-            placeholder='Type here ...'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-            required
-          />
-        </div>
-        <div className='relative mb-4'>
-          <label>Your password</label>
-          <input
-            type={showPassword ? 'text' : 'password'}
-            placeholder='Type here ...'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-10'
-            required
-          />
-          <button
-            type='button'
-            onClick={togglePasswordVisibility}
-            className='absolute inset-y-0 right-0 flex items-center px-3 mt-5'
-          >
-            {showPassword ? (
-              <RiEyeCloseLine className='h-5 w-5 text-gray-400' />
-            ) : (
-              <RiEyeCloseFill className='h-5 w-5 text-gray-400' />
-            )}
-          </button>
-        </div>
+        {password ? (
+          <>
+            <div className='mb-4'>
+              <label>Your email</label>
+              <input
+                type='email'
+                placeholder='Type here ...'
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                required
+              />
+            </div>
+            <div className='relative mb-4'>
+              <label>Your password</label>
+              <input
+                type={showPassword ? 'text' : 'password'}
+                placeholder='Type here ...'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-10'
+                required
+              />
+              <button
+                type='button'
+                onClick={togglePasswordVisibility}
+                className='absolute inset-y-0 right-0 flex items-center px-3 mt-5'
+              >
+                {showPassword ? (
+                  <RiEyeCloseLine className='h-5 w-5 text-gray-400' />
+                ) : (
+                  <RiEyeCloseFill className='h-5 w-5 text-gray-400' />
+                )}
+              </button>
+            </div>{' '}
+          </>
+        ) : (
+          ''
+        )}
         <div className='mb-4'>
           <label>What is your regular income? (salary, etc.)</label>
           <input

@@ -32,7 +32,7 @@ export default async function Home() {
             </>
           ) : (
             <>
-              <LinkItem href='/signup' msg='Start Today' />
+              <LinkItem href='/signup' msg='Sign up' />
               <LinkItem href='/login' msg='Login' />
             </>
           )}

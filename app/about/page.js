@@ -65,7 +65,7 @@ export default function Page() {
           </p>
         </div>
         <div className='mt-20'>
-          <LinkItem href='/signup' msg='Start Today' />
+          <LinkItem href='/signup' msg='Sign up' />
           <LinkItem href='/login' msg='Login' />
         </div>
       </div>

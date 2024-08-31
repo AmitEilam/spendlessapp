@@ -5,6 +5,8 @@ import SignInGoogleButton from './SignInGoogleButton';
 import { signInRegularAction } from '../_lib/actions';
 import { RiEyeCloseFill, RiEyeCloseLine } from 'react-icons/ri';
 import SpinnerMini from './SpinnerMini';
+import LinkItem from './LinkItem';
+import LinkItemSignUp from './LinkItemSignUp';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -87,8 +89,9 @@ function Login() {
             <div className='border-t border-gray-300 w-full mx-4'></div>
           </div>
         </form>
-        <div className='flex justify-center items-center m-7'>
+        <div className='flex flex-col justify-center items-center m-7'>
           <SignInGoogleButton />
+          <LinkItemSignUp href='/signup' msg='Sign up for free' />
         </div>
       </div>
     </div>
