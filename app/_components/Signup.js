@@ -37,7 +37,7 @@ function Signup() {
       router.push('/login');
       toast.success('Welcome! Now login with your details 🐷');
     } catch (error) {
-      setErr('*Somthing went wrong! 🧐');
+      setErr(error.message);
     } finally {
       setIsSubmitting(false);
     }
@@ -81,7 +81,6 @@ function Signup() {
                 <RiEyeCloseFill className='h-5 w-5 text-gray-400' />
               )}
             </button>
-            <p className='text-red-700 text-center'>{err}</p>
           </div>
           <div className='mb-4'>
             <label>First name:</label>
@@ -92,7 +91,6 @@ function Signup() {
               onChange={(e) => setFirstName(e.target.value)}
               className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
             />
-            <p className='text-red-700 text-center'>{err}</p>
           </div>
           <div className='mb-6'>
             <label>Last name:</label>

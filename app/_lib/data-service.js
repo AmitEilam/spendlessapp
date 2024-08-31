@@ -133,6 +133,10 @@ export async function getUserById(id) {
 
 // CREATE --------------------------------------------------------------------------------
 export async function createUser(newGuest) {
+  const aa = await getUser(newGuest.email);
+  if (aa) {
+    throw new Error('User could not be created. This email is already regited');
+  }
   const { data, error } = await supabase.from('users').insert([newGuest]);
 
   if (error) {
