@@ -1,4 +1,4 @@
-import { subMonths } from 'date-fns';
+import { startOfMonth, subMonths } from 'date-fns';
 import { getTransactionsByUser } from '../_lib/data-service';
 import MessageToUser from './MessageToUser';
 import Transaction from './Transaction';
@@ -11,10 +11,11 @@ async function TransactionsList({ filter, user, timeFilter }) {
 
   // Time
   const now = new Date();
+
   if (timeFilter === 'lastMonth') {
-    const lastMonth = subMonths(now, 1);
+    const startOfLastMonth = startOfMonth(now);
     filteredTransactions = filteredTransactions.filter(
-      (trans) => new Date(trans.created_at) >= lastMonth
+      (trans) => new Date(trans.created_at) >= startOfLastMonth
     );
   } else if (timeFilter === 'last3Months') {
     const last3Months = subMonths(now, 3);

@@ -1,6 +1,6 @@
 import EditProfile from '../_components/EditProfile';
 import { auth } from '../_lib/auth';
-import { getSumFixedByUser, getUser, getUserById } from '../_lib/data-service';
+import { getSumFixedByUser, getUserById } from '../_lib/data-service';
 
 export const revalidate = 0;
 
@@ -23,7 +23,7 @@ export default async function Page() {
   return (
     <>
       <div className='mb-5'>
-        <h1 className='text-2xl font-bold'>
+        <h1 className='text-xl font-bold'>
           Hi, {session.user?.name.split(' ')[0]}
         </h1>
       </div>

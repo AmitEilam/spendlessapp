@@ -23,7 +23,7 @@ export default async function Page({ searchParams }) {
       {transactions.length ? (
         <>
           <div className='mb-5 flex items-center justify-between'>
-            <h1 className='text-2xl font-bold'>Transactions</h1>
+            <h1 className='text-xl font-bold'>Transactions</h1>
             <AddTransaction user={userId} />
           </div>
           <div className='flex justify-between max-w-2xl mx-auto items-center'>

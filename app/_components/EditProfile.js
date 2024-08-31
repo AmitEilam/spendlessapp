@@ -4,6 +4,7 @@ import { updateFixed, updateUser } from '../_lib/data-service';
 import toast from 'react-hot-toast';
 import { RiEyeCloseFill, RiEyeCloseLine } from 'react-icons/ri';
 import { useRouter } from 'next/navigation';
+import SpinnerMini from './SpinnerMini';
 
 function EditProfile({
   user,
@@ -23,6 +24,7 @@ function EditProfile({
   const [email, setEmail] = useState(emailDb);
   const [password, setPassword] = useState(passwordDb);
   const [showPassword, setShowPassword] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [err, setErr] = useState('');
   const router = useRouter();
 
@@ -32,7 +34,9 @@ function EditProfile({
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
     if (!salary || !currentExpenses) return;
+    setIsSubmitting(true);
     try {
       setErr('');
       await updateFixed(user, 'salary', +salary);
@@ -44,8 +48,10 @@ function EditProfile({
       toast.error('Failed to update the details! 💔');
       setErr('*Invalid details 🧐');
       console.log(error);
+    } finally {
+      setIsSubmitting(false);
+      router.refresh();
     }
-    router.refresh()
   };
 
   return (
@@ -148,9 +154,10 @@ function EditProfile({
         <div className='flex items-center justify-center'>
           <button
             type='submit'
+            disabled={isSubmitting}
             className='bg-primary-800 px-5 py-3 mx-5 text-white text-lg font-semibold transition-all rounded-full'
           >
-            Save
+            {isSubmitting ? <SpinnerMini /> : 'Save'}
           </button>
         </div>
       </form>

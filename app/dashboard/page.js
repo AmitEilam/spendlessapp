@@ -67,14 +67,16 @@ export default async function Page() {
         </h1>
       </div>
       <div className='flex flex-col text-center'>
-        <h2 className='font-medium'>Expenses and income</h2>
+        <h2 className='font-medium'>Expenses and income this month</h2>
         <Chart
           expense={expense}
           income={income}
           fixedExpense={fixedExpense}
           fixedIncome={fixedIncome}
         />
-        <h2 className='font-medium text-red-800'>Expenses by Category</h2>
+        <h2 className='font-medium text-red-800'>
+          Expenses this month by Category
+        </h2>
         {transactions?.expense || fixed?.expense ? (
           <Stats
             data={transactions?.expense}
@@ -84,7 +86,9 @@ export default async function Page() {
         ) : (
           <MessageToUser>You dont have any expenses yet 👏🏻</MessageToUser>
         )}
-        <h2 className='font-medium text-green-800 mt-10'>Income by Category</h2>
+        <h2 className='font-medium text-green-800 mt-10'>
+          Income this month by Category
+        </h2>
         {transactions?.income || fixed?.income ? (
           <Stats
             data={transactions?.income}
