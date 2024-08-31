@@ -3,17 +3,21 @@ import { useState } from 'react';
 import { createFixed } from '../_lib/data-service';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import SpinnerMini from './SpinnerMini';
 
 function NewAccount({ user }) {
   const [salary, setSalary] = useState('');
   const [rent, setRent] = useState('');
   const [currentExpenses, setCurrentExpenses] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [err, setErr] = useState('');
   const router = useRouter();
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
     if (!salary || !currentExpenses) return;
+    setIsSubmitting(true);
     try {
       setErr('');
       if (currentExpenses)
@@ -32,6 +36,8 @@ function NewAccount({ user }) {
       toast.error('Failed to add details! 💔');
       setErr('*Invalid details 🧐');
       console.log(error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -82,8 +88,9 @@ function NewAccount({ user }) {
           <button
             type='submit'
             className='bg-primary-800 px-5 py-3 text-white text-lg font-semibold transition-all rounded-full'
+            disabled={isSubmitting}
           >
-            Lets start!
+            {isSubmitting ? <SpinnerMini /> : 'Lets start!'}
           </button>
         </div>
       </form>

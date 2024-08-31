@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import NotFound from '../not-found';
 import { supabase } from './supabase';
+import { endOfMonth, startOfMonth } from 'date-fns';
 
 // SELECT --------------------------------------------------------------------------------
 export async function getTransactions() {
@@ -15,10 +16,15 @@ export async function getTransactions() {
 }
 
 export async function getSumTransactionsByUser(id) {
+  const now = new Date();
+  const startOfCurrentMonth = startOfMonth(now).toISOString();
+  const endOfCurrentMonth = endOfMonth(now).toISOString();
   const { data, error } = await supabase
     .from('transactions')
     .select('*')
-    .eq('userId', id);
+    .eq('userId', id)
+    .gte('created_at', startOfCurrentMonth)
+    .lte('created_at', endOfCurrentMonth);
 
   if (error) {
     console.error(error);

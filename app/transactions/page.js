@@ -16,20 +16,25 @@ export default async function Page({ searchParams }) {
   const userId = session?.user?.id;
   const transactions = await getTransactionsByUser(userId);
   const filter = searchParams?.filter ?? 'all';
+  const timeFilter = searchParams?.timeFilter ?? 'lastMonth';
 
   return (
     <>
       {transactions.length ? (
         <>
-          <div className='mb-5'>
+          <div className='mb-5 flex items-center justify-between'>
             <h1 className='text-2xl font-bold'>Transactions</h1>
+            <AddTransaction user={userId} />
           </div>
           <div className='flex justify-between max-w-2xl mx-auto items-center'>
             <Filter />
-            <AddTransaction user={userId} />
           </div>
-          <Suspense fallback={<Spinner />} key={filter}>
-            <TransactionsList filter={filter} user={userId} />
+          <Suspense fallback={<Spinner />} key={`${filter}-${timeFilter}`}>
+            <TransactionsList
+              filter={filter}
+              timeFilter={timeFilter}
+              user={userId}
+            />
           </Suspense>
         </>
       ) : (

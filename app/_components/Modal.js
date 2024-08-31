@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { createTransaction } from '../_lib/data-service';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import SpinnerMini from './SpinnerMini';
 
 function Modal({ modalRef, toggleModal, user }) {
   const router = useRouter();
@@ -9,11 +10,14 @@ function Modal({ modalRef, toggleModal, user }) {
   const [category, setCategory] = useState('');
   const [price, setPrice] = useState('');
   const [notes, setNotes] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [err, setErr] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
     if (!type || !category || !price) return;
+    setIsSubmitting(true);
     try {
       setErr('');
       await createTransaction(user, type, category, price, notes);
@@ -23,8 +27,10 @@ function Modal({ modalRef, toggleModal, user }) {
       toast.error('Failed to add transaction! 💔');
       setErr('*Invalid email or password 🧐');
       console.log(err);
+    } finally {
+      setIsSubmitting(false);
+      router.refresh();
     }
-    router.refresh();
   };
 
   return (
@@ -75,7 +81,7 @@ function Modal({ modalRef, toggleModal, user }) {
               </select>
             </label>
             <label className='block mb-4'>
-              price:
+              Price:
               <input
                 type='number'
                 value={price}
@@ -91,7 +97,7 @@ function Modal({ modalRef, toggleModal, user }) {
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 className='border p-2 rounded w-full'
-                placeholder='Enter notes'
+                placeholder='Not required, but recommended'
                 rows='4'
               />
             </label>
@@ -99,8 +105,9 @@ function Modal({ modalRef, toggleModal, user }) {
               <button
                 type='submit'
                 className='bg-primary-800 px-5 py-3 text-white text-lg font-semibold transition-all rounded-full'
+                disabled={isSubmitting}
               >
-                Submit
+                {isSubmitting ? <SpinnerMini /> : 'Submit'}
               </button>
               <button
                 type='button'

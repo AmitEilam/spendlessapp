@@ -6,6 +6,7 @@ import { createUser } from '../_lib/data-service';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { RiEyeCloseFill, RiEyeCloseLine } from 'react-icons/ri';
+import SpinnerMini from './SpinnerMini';
 
 function Signup() {
   const [email, setEmail] = useState('');
@@ -13,6 +14,7 @@ function Signup() {
   const [showPassword, setShowPassword] = useState(false);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [err, setErr] = useState('');
   const router = useRouter();
 
@@ -22,7 +24,9 @@ function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
     if (!email || !password || !firstName || !lastName) return;
+    setIsSubmitting(true);
     try {
       setErr('');
       await createUser({ email, password, firstName, lastName });
@@ -34,6 +38,8 @@ function Signup() {
       toast.success('Welcome! Now login with your details 🐷');
     } catch (error) {
       setErr('*Somthing went wrong! 🧐');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -103,8 +109,9 @@ function Signup() {
             <button
               type='submit'
               className='bg-primary-800 px-5 py-3 text-white text-lg font-semibold transition-all rounded-full'
+              disabled={isSubmitting}
             >
-              Sign up
+              {isSubmitting ? <SpinnerMini /> : 'Sign up'}
             </button>
           </div>
           <div className='flex items-center justify-center mt-8 mb-4'>

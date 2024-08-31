@@ -1,5 +1,6 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
+import { FaPlus } from 'react-icons/fa';
 import Modal from './Modal';
 
 function AddTransaction({ user }) {
@@ -32,9 +33,10 @@ function AddTransaction({ user }) {
   return (
     <div>
       <button
-        className='px-3 py-1 mr-2 text-xs sm:text-base font-medium rounded-full border bg-primary-800 text-white'
+        className='flex items-center px-3 py-1 mr-2 text-xs sm:text-base font-medium rounded-md border border-primary-800 bg-white text-primary-800 hover:bg-primary-800 hover:text-white'
         onClick={toggleModal}
       >
+        <FaPlus className='mr-1' />
         Add Transaction
       </button>
 

@@ -4,12 +4,14 @@ import { useState } from 'react';
 import SignInGoogleButton from './SignInGoogleButton';
 import { signInRegularAction } from '../_lib/actions';
 import { RiEyeCloseFill, RiEyeCloseLine } from 'react-icons/ri';
+import SpinnerMini from './SpinnerMini';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [err, setErr] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
@@ -17,12 +19,16 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
     if (!email || !password) return;
+    setIsSubmitting(true);
     try {
       setErr('');
       await signInRegularAction(email, password);
     } catch (error) {
       setErr('*Invalid email or password 🧐');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -69,9 +75,10 @@ function Login() {
           <div className='flex items-center justify-center'>
             <button
               type='submit'
+              disabled={isSubmitting}
               className='bg-primary-800 px-5 py-3 text-white text-lg font-semibold transition-all rounded-full'
             >
-              Login
+              {isSubmitting ? <SpinnerMini /> : 'Login'}
             </button>
           </div>
           <div className='flex items-center justify-center mt-8 mb-4'>
