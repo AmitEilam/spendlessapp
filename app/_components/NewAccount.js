@@ -31,7 +31,6 @@ function NewAccount({ user }) {
       console.log(error);
       router.refresh();
     }
-    router.refresh();
     router.push('/dashboard');
   };
 
