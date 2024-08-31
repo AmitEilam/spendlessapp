@@ -48,10 +48,14 @@ function Modal({ isOpen, onClose, category, price, date, notes }) {
             &#8362;
           </p>
         </div>
-        <div className='mb-4 flex'>
-          <p className='font-semibold mr-2'>📝</p>
-          <p>{notes}</p>
-        </div>
+        {notes ? (
+          <div className='mb-4 flex'>
+            <p className='font-semibold mr-2'>📝</p>
+            <p>{notes}</p>
+          </div>
+        ) : (
+          ''
+        )}
       </div>
     </div>,
     document.body
