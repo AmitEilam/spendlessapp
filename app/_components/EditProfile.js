@@ -69,6 +69,7 @@ function EditProfile({
             onChange={(e) => setFirstName(e.target.value)}
             className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
             required
+            disabled={user === 1}
           />
         </div>
         <div className='mb-4'>
@@ -80,9 +81,10 @@ function EditProfile({
             onChange={(e) => setLastName(e.target.value)}
             className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
             required
+            disabled={user === 1}
           />
         </div>
-        {password && user !== 1 ? (
+        {password ? (
           <>
             <div className='mb-4'>
               <label>Your email</label>
@@ -104,11 +106,13 @@ function EditProfile({
                 onChange={(e) => setPassword(e.target.value)}
                 className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-10'
                 required
+                disabled={user === 1}
               />
               <button
                 type='button'
                 onClick={togglePasswordVisibility}
                 className='absolute inset-y-0 right-0 flex items-center px-3 mt-5'
+                disabled={user === 1}
               >
                 {showPassword ? (
                   <RiEyeCloseLine className='h-5 w-5 text-gray-400' />
