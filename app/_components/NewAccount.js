@@ -44,7 +44,7 @@ function NewAccount({ user }) {
   return (
     <div className='flex justify-center items-center'>
       <form onSubmit={submitHandler} className='border p-10 bg-white'>
-        <h2 className='sm: text-2xl font-bold text-center text-gray-800 mb-10'>
+        <h2 className='sm:text-2xl text-lg font-bold text-center text-gray-800 mb-10'>
           🐷 Welcome! 👋🏼 <br />
           We need a few details to start
         </h2>
