@@ -82,7 +82,7 @@ function EditProfile({
             required
           />
         </div>
-        {password ? (
+        {password && user !== 1 ? (
           <>
             <div className='mb-4'>
               <label>Your email</label>
