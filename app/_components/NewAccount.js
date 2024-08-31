@@ -20,12 +20,17 @@ function NewAccount({ user }) {
         await createFixed(user, 'expense', 'currentExpenses', currentExpenses);
       if (salary) await createFixed(user, 'income', 'salary', salary);
       if (rent) await createFixed(user, 'expense', 'rent', rent);
+
+      // לאחר שכל הפעולות הסתיימו בהצלחה
       setSalary('');
       setRent('');
       setCurrentExpenses('');
       toast.success('Your details successfully added! 🐷');
+
       router.push('/dashboard');
-      router.refresh();
+      setTimeout(() => {
+        router.refresh();
+      }, 200);
     } catch (error) {
       toast.error('Failed to add details! 💔');
       setErr('*Invalid details 🧐');
