@@ -16,7 +16,7 @@ export default async function Home() {
         className='absolute inset-0 object-cover object-bottom blur-[2px]'
         alt='home-background'
       />
-      <div className='relative z-10 text-center mt-[-15%]'>
+      <div className='relative z-10 text-center'>
         <LogoWithoutText />
         <h1 className='text-6xl text-primary-800 mb-2 mt-1 tracking-tight font-n'>
           SpendLess
