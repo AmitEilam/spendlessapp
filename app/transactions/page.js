@@ -19,7 +19,7 @@ export default async function Page({ searchParams }) {
   const timeFilter = searchParams?.timeFilter ?? 'lastMonth';
 
   return (
-    <div className='p-4'>
+    <>
       {transactions.length ? (
         <>
           <div className='mb-5 flex items-center justify-between'>
@@ -45,6 +45,6 @@ export default async function Page({ searchParams }) {
           <AddTransaction user={userId} />
         </div>
       )}
-    </div>
+    </>
   );
 }

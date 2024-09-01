@@ -8,15 +8,15 @@ export default async function Home() {
   const session = await auth();
 
   return (
-    <div className='relative flex flex-col justify-center items-center h-screen'>
+    <div className='mt-10 flex justify-center items-center'>
       <Image
         src={background}
         fill
         quality={90}
-        className='absolute inset-0 object-cover object-bottom blur-[2px]'
+        className='relative object-cover object-bottom blur-[2px]'
         alt='home-background'
       />
-      <div className='relative z-10 text-center mt-[-15%]'>
+      <div className='relative z-10 text-center mt-10'>
         <LogoWithoutText />
         <h1 className='text-6xl text-primary-800 mb-2 mt-1 tracking-tight font-n'>
           SpendLess
