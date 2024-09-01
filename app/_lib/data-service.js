@@ -135,7 +135,9 @@ export async function getUserById(id) {
 export async function createUser(newGuest) {
   const aa = await getUser(newGuest.email);
   if (aa) {
-    throw new Error('User could not be created. This email is already regited');
+    throw new Error(
+      'User could not be created. This email is already registered'
+    );
   }
   const { data, error } = await supabase.from('users').insert([newGuest]);
 

@@ -13,7 +13,7 @@ function Transaction({ category, price, type, date, notes, id }) {
   const formattedDate = format(date, 'dd.MM.yy');
   let borderColor;
 
-  const { title, iconCat, bgColor } = handlerCategory(category);
+  const { title, iconCat, bgColor } = handlerCategory(category, 'transaction');
 
   function deleteHandler(e) {
     e.stopPropagation();

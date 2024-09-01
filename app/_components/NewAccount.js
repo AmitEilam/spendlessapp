@@ -53,6 +53,8 @@ function NewAccount({ user }) {
           <input
             type='number'
             placeholder='Type here ...'
+            max={1000000}
+            min={1}
             value={salary}
             onChange={(e) => setSalary(e.target.value)}
             className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
@@ -64,6 +66,8 @@ function NewAccount({ user }) {
           <input
             type='number'
             placeholder='Type here ...'
+            max={1000000}
+            min={0}
             value={rent}
             onChange={(e) => setRent(e.target.value)}
             className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
@@ -77,6 +81,8 @@ function NewAccount({ user }) {
           <input
             type='number'
             placeholder='Type here ...'
+            max={1000000}
+            min={1}
             value={currentExpenses}
             onChange={(e) => setCurrentExpenses(e.target.value)}
             className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'

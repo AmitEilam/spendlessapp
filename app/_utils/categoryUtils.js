@@ -4,7 +4,7 @@ import { FaCar, FaHome } from 'react-icons/fa';
 import { CiMoneyCheck1 } from 'react-icons/ci';
 import { TbArrowsTransferDown } from 'react-icons/tb';
 
-export function handlerCategory(category) {
+export function handlerCategory(category, source) {
   let title = category;
   let iconCat = '';
   let bgColor = '';
@@ -21,7 +21,7 @@ export function handlerCategory(category) {
       bgColor = 'bg-blue-300 text-blue-800';
       break;
     case 'restaurant':
-      title = 'Restaurant';
+      source === 'dashboard' ? (title = 'Restaurants') : (title = 'Restaurant');
       iconCat = <MdRestaurant />;
       bgColor = 'bg-orange-300 text-orange-800';
       break;
@@ -41,7 +41,7 @@ export function handlerCategory(category) {
       bgColor = 'bg-green-300 text-green-800';
       break;
     case 'transfer':
-      title = 'Transfer';
+      source === 'dashboard' ? (title = 'Transfers') : (title = 'Transfer');
       iconCat = <TbArrowsTransferDown />;
       bgColor = 'bg-pink-300 text-pink-800';
       break;

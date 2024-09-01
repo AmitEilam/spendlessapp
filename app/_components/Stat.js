@@ -1,7 +1,7 @@
 import { handlerCategory } from '../_utils/categoryUtils';
 
 function Stat({ value, type, category }) {
-  const { title, iconCat, bgColor } = handlerCategory(category);
+  const { title, iconCat, bgColor } = handlerCategory(category, 'dashboard');
   return (
     <div className='flex flex-col bg-white shadow-md rounded-lg p-6 m-6 w-[230px] my-4 border border-gray-200 inner-border-left transition-transform transform  fade-in'>
       <div className='flex items-center justify-center'>

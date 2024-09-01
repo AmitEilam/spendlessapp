@@ -64,6 +64,7 @@ function EditProfile({
           <label>Your first name</label>
           <input
             type='text'
+            maxLength={15}
             placeholder='Type here ...'
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
@@ -76,6 +77,7 @@ function EditProfile({
           <label>Your last name</label>
           <input
             type='text'
+            maxLength={15}
             placeholder='Type here ...'
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
@@ -89,6 +91,7 @@ function EditProfile({
             <div className='mb-4'>
               <label>Your email</label>
               <input
+                maxLength={25}
                 type='email'
                 placeholder='Type here ...'
                 value={email}
@@ -102,6 +105,7 @@ function EditProfile({
               <label>Your password</label>
               <input
                 type={showPassword ? 'text' : 'password'}
+                maxLength={15}
                 placeholder='Type here ...'
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -130,6 +134,7 @@ function EditProfile({
           <label>What is your regular income? (salary, etc.)</label>
           <input
             type='number'
+            min={1}
             placeholder='Type here ...'
             value={salary}
             onChange={(e) => setSalary(e.target.value)}
@@ -142,6 +147,7 @@ function EditProfile({
           <input
             type='number'
             placeholder='Type here ...'
+            min={0}
             value={rent}
             onChange={(e) => setRent(e.target.value)}
             className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
@@ -154,6 +160,7 @@ function EditProfile({
           </label>
           <input
             type='number'
+            min={1}
             placeholder='Type here ...'
             value={currentExpenses}
             onChange={(e) => setCurrentExpenses(e.target.value)}

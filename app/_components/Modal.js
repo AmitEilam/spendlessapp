@@ -95,6 +95,7 @@ function Modal({ modalRef, toggleModal, user }) {
               Notes:
               <textarea
                 value={notes}
+                maxLength={35}
                 onChange={(e) => setNotes(e.target.value)}
                 className='border p-2 rounded w-full'
                 placeholder='Not required, but recommended'

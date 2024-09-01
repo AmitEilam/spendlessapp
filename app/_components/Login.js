@@ -46,6 +46,7 @@ function Login() {
             <label>Email:</label>
             <input
               type='email'
+              maxLength={25}
               placeholder='expample@example.com'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -56,6 +57,7 @@ function Login() {
             <label>Password:</label>
             <input
               type={showPassword ? 'text' : 'password'}
+              maxLength={15}
               placeholder='Use strong password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
