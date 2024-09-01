@@ -1,7 +1,7 @@
 import { GiPartyPopper, GiMoneyStack } from 'react-icons/gi';
 import { MdRestaurant, MdFastfood } from 'react-icons/md';
-import { FaCar, FaHome } from 'react-icons/fa';
-import { CiMoneyCheck1 } from 'react-icons/ci';
+import { FaCar, FaHome, FaMoneyCheckAlt } from 'react-icons/fa';
+import { CiMoneyCheck1, CiShoppingTag } from 'react-icons/ci';
 import { TbArrowsTransferDown } from 'react-icons/tb';
 
 export function handlerCategory(category, source) {
@@ -44,6 +44,21 @@ export function handlerCategory(category, source) {
       source === 'dashboard' ? (title = 'Transfers') : (title = 'Transfer');
       iconCat = <TbArrowsTransferDown />;
       bgColor = 'bg-pink-300 text-pink-800';
+      break;
+    case 'rent':
+      title = 'Rent';
+      iconCat = <FaHome />;
+      bgColor = 'bg-cyan-300 text-cyan-800';
+      break;
+    case 'shopping':
+      title = 'Shopping';
+      iconCat = <CiShoppingTag />;
+      bgColor = 'bg-red-300 text-red-800';
+      break;
+    case 'other':
+      source === 'dashboard' ? (title = 'Others') : (title = 'Other');
+      iconCat = <FaMoneyCheckAlt />;
+      bgColor = 'bg-blue-300 text-blue-800';
       break;
     case 'rent':
       title = 'Rent';

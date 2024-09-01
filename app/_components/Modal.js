@@ -72,12 +72,13 @@ function Modal({ modalRef, toggleModal, user }) {
                 <option value='' disabled>
                   Select category
                 </option>
-                <option value='nightout'>nightout</option>
-                <option value='car'>car</option>
-                <option value='supermarket'>supermarket</option>
-                <option value='restaurant'>restaurant</option>
-                <option value='transfer'>transfer</option>
-                {/* Add more categories as needed */}
+                <option value='nightout'>Nightout</option>
+                <option value='car'>Car</option>
+                <option value='supermarket'>Supermarket</option>
+                <option value='restaurant'>Restaurant</option>
+                <option value='transfer'>Transfer</option>
+                <option value='shopping'>Shopping</option>
+                <option value='other'>Other</option>
               </select>
             </label>
             <label className='block mb-4'>
