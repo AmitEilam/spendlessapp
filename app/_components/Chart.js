@@ -24,7 +24,7 @@ function Chart({ expense, income, fixedExpense, fixedIncome }) {
     const absNum = Math.abs(num);
     let formattedNumber = num;
 
-    if (absNum >= 1000) {
+    if (absNum >= 10000) {
       formattedNumber = (num / 1000).toFixed(1) + 'k';
     }
 
