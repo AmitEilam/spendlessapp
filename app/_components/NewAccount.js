@@ -45,7 +45,7 @@ function NewAccount({ user }) {
     <div className='flex justify-center items-center'>
       <form onSubmit={submitHandler} className='border p-10 bg-white'>
         <h2 className='sm:text-2xl text-lg font-bold text-center text-gray-800 mb-10'>
-          🐷 Welcome! 👋🏼 <br />
+          🐷 Hi! 👋🏼 <br />
           We need a few details to start
         </h2>
         <div className='mb-4'>
@@ -75,8 +75,8 @@ function NewAccount({ user }) {
         </div>
         <div className='mb-6'>
           <label>
-            What is your current expenses (electricity, water, gas, property
-            tax, internet, etc. )?
+            What is your current expenses? (electricity, water, gas, property
+            tax, internet, etc. )
           </label>
           <input
             type='number'
