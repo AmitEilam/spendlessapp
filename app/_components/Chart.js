@@ -20,6 +20,17 @@ function Chart({ expense, income, fixedExpense, fixedIncome }) {
     },
   ];
 
+  function formatNumber(num) {
+    const absNum = Math.abs(num);
+    let formattedNumber = num;
+
+    if (absNum >= 1000) {
+      formattedNumber = (num / 1000).toFixed(1) + 'k';
+    }
+
+    return formattedNumber;
+  }
+
   return (
     <div className='flex flex-wrap justify-center mb-12 mt-3'>
       <ResponsiveContainer width='70%' height={300}>
@@ -43,6 +54,7 @@ function Chart({ expense, income, fixedExpense, fixedIncome }) {
               position='center'
               fill='darkRed'
               style={{ fontSize: '12px' }}
+              formatter={formatNumber}
             />
           </Bar>
           <Bar dataKey='income' fill='#80D27D'>
@@ -51,6 +63,7 @@ function Chart({ expense, income, fixedExpense, fixedIncome }) {
               position='center'
               fill='darkGreen'
               style={{ fontSize: '12px' }}
+              formatter={formatNumber}
             />
           </Bar>
         </BarChart>
