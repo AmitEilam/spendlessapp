@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { RiEyeCloseFill, RiEyeCloseLine } from 'react-icons/ri';
 import SpinnerMini from './SpinnerMini';
+import { signInRegularAction } from '../_lib/actions';
 
 function Signup() {
   const [email, setEmail] = useState('');
@@ -30,12 +31,17 @@ function Signup() {
     try {
       setErr('');
       await createUser({ email, password, firstName, lastName });
+      const result = await signInRegularAction(email, password);
       setFirstName('');
       setLastName('');
       setPassword('');
       setEmail('');
-      router.push('/login');
-      toast.success('Welcome! Now login with your details 🐷');
+      if (result?.error) {
+        setErr(result.error);
+      } else {
+        router.push('/dashboard');
+        toast.success(`Welcome ${firstName}! 🐷`);
+      }
     } catch (error) {
       setErr(error.message);
     } finally {
