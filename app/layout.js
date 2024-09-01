@@ -1,7 +1,6 @@
 import { Toaster } from 'react-hot-toast';
 import '../_styles/globals.css';
 import Header from './_components/Header';
-import { NunitoSans } from 'next/font/google';
 import { Nunito } from 'next/font/google';
 
 const nunito = Nunito({
