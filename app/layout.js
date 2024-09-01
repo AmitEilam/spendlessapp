@@ -15,9 +15,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${nunito.className} antialiased bg-[#FAFAFA] text-black min-h-screen flex flex-col`}
       >
-        <header>
-          <Header />
-        </header>
+        <Header />
         <main className='p-5'>{children}</main>
         <Toaster
           position='top-center'
