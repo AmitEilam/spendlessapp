@@ -21,7 +21,7 @@ export default async function Page() {
   const currentExpenses = fixed?.expense?.currentExpenses;
 
   return (
-    <>
+    <div className='p-4'>
       <div className='mb-5'>
         <h1 className='text-xl font-bold'>
           Hi, {session.user?.name.split(' ')[0]}
@@ -37,6 +37,6 @@ export default async function Page() {
         emailDb={email}
         passwordDb={password}
       />
-    </>
+    </div>
   );
 }

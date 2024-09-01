@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
         <header>
           <Header />
         </header>
-        <main className='p-5'>{children}</main>
+        <main className='relative flex-grow'>{children}</main>
         <Toaster
           position='top-center'
           gutter={12}

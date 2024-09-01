@@ -60,7 +60,7 @@ export default async function Page() {
   }
 
   return (
-    <>
+    <div className='p-4'>
       <div className='mb-5'>
         <h1 className='text-xl font-bold'>
           Welcome, {session?.user?.name.split(' ')[0]}
@@ -99,6 +99,6 @@ export default async function Page() {
           <MessageToUser>You dont have any Income yet 🤨</MessageToUser>
         )}
       </div>
-    </>
+    </div>
   );
 }
