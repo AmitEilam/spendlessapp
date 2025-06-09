@@ -47,7 +47,7 @@ function Login() {
             <input
               type='email'
               maxLength={25}
-              placeholder='expample@example.com'
+              placeholder='admin@admin.com for testing'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
@@ -58,7 +58,7 @@ function Login() {
             <input
               type={showPassword ? 'text' : 'password'}
               maxLength={15}
-              placeholder='Use strong password'
+              placeholder='admin for testing'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
