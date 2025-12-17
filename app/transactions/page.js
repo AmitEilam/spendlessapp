@@ -6,7 +6,7 @@ import { auth } from '../_lib/auth';
 import AddTransaction from '../_components/AddTransaction';
 import ExportData from '../_components/ExportData';
 import { getTransactionsByUser } from '../_lib/data-service';
-import MessageToUser from '../_components/MessageToUser';
+import EmptyState from '../_components/EmptyState';
 
 export const metadata = {
   title: 'Transactions / SpendLess',
@@ -46,12 +46,7 @@ export default async function Page({ searchParams }) {
           </Suspense>
         </>
       ) : (
-        <div className='flex flex-col justify-center items-center'>
-          <MessageToUser>
-            There is not transactions yet, please add some 🐷
-          </MessageToUser>
-          <AddTransaction user={userId} />
-        </div>
+        <EmptyState userId={userId} />
       )}
     </>
   );

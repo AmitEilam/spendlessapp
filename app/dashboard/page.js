@@ -1,6 +1,7 @@
 import Stats from '../_components/Stats';
 import Chart from '../_components/Chart';
 import MonthlyChart from '../_components/MonthlyChart';
+import BalanceSummary from '../_components/BalanceSummary';
 import { auth } from '../_lib/auth';
 import {
   getSumFixedByUser,
@@ -38,6 +39,9 @@ export default async function Page() {
   const fixedExpense = sumValues(fixed?.expense);
   const fixedIncome = sumValues(fixed?.income);
 
+  const totalIncome = income + fixedIncome;
+  const totalExpenses = expense + fixedExpense;
+
   return (
     <>
       <div className='mb-5'>
@@ -45,6 +49,7 @@ export default async function Page() {
           Welcome, {session?.user?.name.split(' ')[0]}
         </h1>
       </div>
+      <BalanceSummary totalIncome={totalIncome} totalExpenses={totalExpenses} />
       <div className='flex flex-col text-center'>
         <h2 className='font-medium'>Expenses and income this month</h2>
         <Chart
