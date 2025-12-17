@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { supabase } from './supabase';
-import { endOfMonth, startOfMonth } from 'date-fns';
+import { endOfMonth, startOfMonth, subMonths, format } from 'date-fns';
 
 // SELECT --------------------------------------------------------------------------------
 export async function getTransactions() {
@@ -77,6 +77,76 @@ export async function getSumFixedByUser(id) {
   }, {});
 
   return result;
+}
+
+export async function getMonthlyTrendsByUser(id) {
+  const now = new Date();
+  const sixMonthsAgo = startOfMonth(subMonths(now, 5));
+
+  // Fetch transactions from the last 6 months
+  const { data: transactions, error: transError } = await supabase
+    .from('transactions')
+    .select('*')
+    .eq('userId', id)
+    .gte('created_at', sixMonthsAgo.toISOString())
+    .order('created_at', { ascending: true });
+
+  if (transError) {
+    console.error(transError);
+    notFound();
+  }
+
+  // Fetch fixed expenses/income
+  const { data: fixed, error: fixedError } = await supabase
+    .from('fixed')
+    .select('*')
+    .eq('userId', id);
+
+  if (fixedError) {
+    console.error(fixedError);
+    notFound();
+  }
+
+  // Calculate fixed totals
+  const fixedTotals = fixed.reduce(
+    (acc, item) => {
+      if (item.type === 'expense') {
+        acc.expenses += item.price;
+      } else if (item.type === 'income') {
+        acc.income += item.price;
+      }
+      return acc;
+    },
+    { expenses: 0, income: 0 }
+  );
+
+  // Initialize the last 6 months with fixed values
+  const monthlyData = {};
+  for (let i = 5; i >= 0; i--) {
+    const monthDate = subMonths(now, i);
+    const monthKey = format(monthDate, 'yyyy-MM');
+    const monthLabel = format(monthDate, 'MMM');
+    monthlyData[monthKey] = {
+      month: monthLabel,
+      expenses: fixedTotals.expenses,
+      income: fixedTotals.income,
+    };
+  }
+
+  // Add transaction data to each month
+  transactions.forEach((transaction) => {
+    const monthKey = format(new Date(transaction.created_at), 'yyyy-MM');
+    if (monthlyData[monthKey]) {
+      if (transaction.type === 'expense') {
+        monthlyData[monthKey].expenses += transaction.price;
+      } else if (transaction.type === 'income') {
+        monthlyData[monthKey].income += transaction.price;
+      }
+    }
+  });
+
+  // Convert to array sorted by month
+  return Object.values(monthlyData);
 }
 
 export async function getTransactionsByUser(id) {

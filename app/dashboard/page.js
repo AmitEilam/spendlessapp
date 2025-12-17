@@ -1,9 +1,11 @@
 import Stats from '../_components/Stats';
 import Chart from '../_components/Chart';
+import MonthlyChart from '../_components/MonthlyChart';
 import { auth } from '../_lib/auth';
 import {
   getSumFixedByUser,
   getSumTransactionsByUser,
+  getMonthlyTrendsByUser,
 } from '../_lib/data-service';
 import { redirect } from 'next/navigation';
 import MessageToUser from '../_components/MessageToUser';
@@ -22,6 +24,7 @@ export default async function Page() {
   const session = await auth();
   const transactions = await getSumTransactionsByUser(session.user.id);
   const fixed = await getSumFixedByUser(session.user.id);
+  const monthlyTrends = await getMonthlyTrendsByUser(session.user.id);
 
   // Redirect if user has no fixed data (new account)
   if (!fixed?.expense && !fixed?.income) {
@@ -72,6 +75,8 @@ export default async function Page() {
         ) : (
           <MessageToUser>You don&apos;t have any income yet 🤨</MessageToUser>
         )}
+        <h2 className='font-medium mt-10'>Spending Trends (Last 6 Months)</h2>
+        <MonthlyChart data={monthlyTrends} />
       </div>
     </>
   );
