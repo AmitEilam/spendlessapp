@@ -85,7 +85,7 @@ function EditProfile({
             disabled={user === 1}
           />
         </div>
-        {password ? (
+        {password && (
           <>
             <div className='mb-4'>
               <label>Your email</label>
