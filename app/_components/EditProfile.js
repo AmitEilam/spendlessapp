@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { updateFixed, updateUser } from '../_lib/data-service';
 import toast from 'react-hot-toast';
-import { RiEyeCloseFill, RiEyeCloseLine } from 'react-icons/ri';
+import { RiEyeLine, RiEyeOffLine } from 'react-icons/ri';
 import { useRouter } from 'next/navigation';
 import SpinnerMini from './SpinnerMini';
 
@@ -119,9 +119,9 @@ function EditProfile({
                 disabled={user === 1}
               >
                 {showPassword ? (
-                  <RiEyeCloseLine className='h-5 w-5 text-gray-400' />
+                  <RiEyeOffLine className='h-5 w-5 text-gray-400' />
                 ) : (
-                  <RiEyeCloseFill className='h-5 w-5 text-gray-400' />
+                  <RiEyeLine className='h-5 w-5 text-gray-400' />
                 )}
               </button>
             </div>

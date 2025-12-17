@@ -4,7 +4,7 @@ import { useState } from 'react';
 import SignInGoogleButton from './SignInGoogleButton';
 import SignInGitHubButton from './SignInGitHubButton';
 import { signInRegularAction } from '../_lib/actions';
-import { RiEyeCloseFill, RiEyeCloseLine } from 'react-icons/ri';
+import { RiEyeLine, RiEyeOffLine } from 'react-icons/ri';
 import SpinnerMini from './SpinnerMini';
 import LinkItem from './LinkItem';
 import LinkItemSignUp from './LinkItemSignUp';
@@ -70,9 +70,9 @@ function Login() {
               className='absolute inset-y-0 right-0 flex items-center px-3 mt-3'
             >
               {showPassword ? (
-                <RiEyeCloseLine className='h-5 w-5 text-gray-400' />
+                <RiEyeOffLine className='h-5 w-5 text-gray-400' />
               ) : (
-                <RiEyeCloseFill className='h-5 w-5 text-gray-400' />
+                <RiEyeLine className='h-5 w-5 text-gray-400' />
               )}
             </button>
             <p className='text-red-700 text-center'>{err}</p>

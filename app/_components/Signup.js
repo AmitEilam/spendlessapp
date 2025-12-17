@@ -6,7 +6,7 @@ import SignInGitHubButton from './SignInGitHubButton';
 import { createUser } from '../_lib/data-service';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
-import { RiEyeCloseFill, RiEyeCloseLine } from 'react-icons/ri';
+import { RiEyeLine, RiEyeOffLine } from 'react-icons/ri';
 import SpinnerMini from './SpinnerMini';
 import { signInRegularAction } from '../_lib/actions';
 
@@ -85,9 +85,9 @@ function Signup() {
               className='absolute inset-y-0 right-0 flex items-center px-3 mt-3'
             >
               {showPassword ? (
-                <RiEyeCloseLine className='h-5 w-5 text-gray-400' />
+                <RiEyeOffLine className='h-5 w-5 text-gray-400' />
               ) : (
-                <RiEyeCloseFill className='h-5 w-5 text-gray-400' />
+                <RiEyeLine className='h-5 w-5 text-gray-400' />
               )}
             </button>
           </div>
