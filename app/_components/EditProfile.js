@@ -169,10 +169,12 @@ function EditProfile({
         <div className='flex items-center justify-center'>
           <button
             type='submit'
-            disabled={isSubmitting}
-            className='bg-primary-800 px-5 py-3 mx-5 text-white text-lg font-semibold transition-all rounded-full'
+            disabled={isSubmitting || user === 1}
+            className={`px-5 py-3 mx-5 text-white text-lg font-semibold transition-all rounded-full ${
+              user === 1 ? 'bg-gray-400 cursor-not-allowed' : 'bg-primary-800'
+            }`}
           >
-            {isSubmitting ? <SpinnerMini /> : 'Save'}
+            {user === 1 ? 'Unavailable' : isSubmitting ? <SpinnerMini /> : 'Save'}
           </button>
         </div>
       </form>
