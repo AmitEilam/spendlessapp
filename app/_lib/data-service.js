@@ -49,6 +49,26 @@ export async function getSumTransactionsByUser(id) {
   return result;
 }
 
+export async function getCurrentMonthTransactions(id) {
+  const now = new Date();
+  const startOfCurrentMonth = startOfMonth(now).toISOString();
+  const endOfCurrentMonth = endOfMonth(now).toISOString();
+  const { data, error } = await supabase
+    .from('transactions')
+    .select('*')
+    .eq('userId', id)
+    .gte('created_at', startOfCurrentMonth)
+    .lte('created_at', endOfCurrentMonth)
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error(error);
+    notFound();
+  }
+
+  return data;
+}
+
 export async function getSumFixedByUser(id) {
   const { data, error } = await supabase
     .from('fixed')

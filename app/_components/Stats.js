@@ -1,6 +1,6 @@
 import Stat from './Stat';
 
-function Stats({ data, fixed, type }) {
+function Stats({ data, fixed, type, transactions = [] }) {
   if ((!data && !fixed) || !type) return null;
 
   const dataEntries = data ? Object.entries(data) : [];
@@ -15,6 +15,7 @@ function Stats({ data, fixed, type }) {
             value={price}
             type={type}
             category={category}
+            transactions={transactions}
           />
         ) : null
       )}
@@ -25,6 +26,8 @@ function Stats({ data, fixed, type }) {
             value={price}
             type={type}
             category={category}
+            transactions={[]}
+            isFixed={true}
           />
         ) : null
       )}

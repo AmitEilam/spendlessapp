@@ -6,6 +6,7 @@ import {
   getSumFixedByUser,
   getSumTransactionsByUser,
   getMonthlyTrendsByUser,
+  getCurrentMonthTransactions,
 } from '../_lib/data-service';
 import { redirect } from 'next/navigation';
 import MessageToUser from '../_components/MessageToUser';
@@ -22,7 +23,8 @@ const sumValues = (obj) =>
 
 export default async function Page() {
   const session = await auth();
-  const transactions = await getSumTransactionsByUser(session.user.id);
+  const transactionsSummary = await getSumTransactionsByUser(session.user.id);
+  const rawTransactions = await getCurrentMonthTransactions(session.user.id);
   const fixed = await getSumFixedByUser(session.user.id);
   const monthlyTrends = await getMonthlyTrendsByUser(session.user.id);
 
@@ -31,8 +33,8 @@ export default async function Page() {
     redirect('/newAccount');
   }
 
-  const expense = sumValues(transactions?.expense);
-  const income = sumValues(transactions?.income);
+  const expense = sumValues(transactionsSummary?.expense);
+  const income = sumValues(transactionsSummary?.income);
   const fixedExpense = sumValues(fixed?.expense);
   const fixedIncome = sumValues(fixed?.income);
 
@@ -54,11 +56,12 @@ export default async function Page() {
         <h2 className='font-medium text-red-800'>
           Expenses this month by Category
         </h2>
-        {transactions?.expense || fixed?.expense ? (
+        {transactionsSummary?.expense || fixed?.expense ? (
           <Stats
-            data={transactions?.expense}
+            data={transactionsSummary?.expense}
             fixed={fixed?.expense}
             type='expense'
+            transactions={rawTransactions}
           />
         ) : (
           <MessageToUser>You don&apos;t have any expenses yet 👏🏻</MessageToUser>
@@ -66,11 +69,12 @@ export default async function Page() {
         <h2 className='font-medium text-green-800 mt-10'>
           Income this month by Category
         </h2>
-        {transactions?.income || fixed?.income ? (
+        {transactionsSummary?.income || fixed?.income ? (
           <Stats
-            data={transactions?.income}
+            data={transactionsSummary?.income}
             fixed={fixed?.income}
             type='income'
+            transactions={rawTransactions}
           />
         ) : (
           <MessageToUser>You don&apos;t have any income yet 🤨</MessageToUser>
