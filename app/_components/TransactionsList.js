@@ -5,8 +5,8 @@ import Transaction from './Transaction';
 
 const TIME_FILTER_MONTHS = {
   lastMonth: 0,
-  last3Months: 3,
-  last6Months: 6,
+  last3Month: 3,
+  last6Month: 6,
   lastYear: 12,
 };
 

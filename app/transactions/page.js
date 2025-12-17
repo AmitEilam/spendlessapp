@@ -4,6 +4,7 @@ import TransactionsList from '../_components/TransactionsList';
 import Spinner from '../_components/Spinner';
 import { auth } from '../_lib/auth';
 import AddTransaction from '../_components/AddTransaction';
+import ExportData from '../_components/ExportData';
 import { getTransactionsByUser } from '../_lib/data-service';
 import MessageToUser from '../_components/MessageToUser';
 
@@ -24,7 +25,14 @@ export default async function Page({ searchParams }) {
         <>
           <div className='mb-5 flex items-center justify-between'>
             <h1 className='text-xl font-bold'>Transactions</h1>
-            <AddTransaction user={userId} />
+            <div className='flex items-center gap-2'>
+              <ExportData
+                transactions={transactions}
+                filter={filter}
+                timeFilter={timeFilter}
+              />
+              <AddTransaction user={userId} />
+            </div>
           </div>
           <div className='flex justify-between max-w-2xl mx-auto items-center'>
             <Filter />
