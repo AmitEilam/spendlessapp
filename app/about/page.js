@@ -64,7 +64,7 @@ export default function Page() {
             of your financial life..
           </p>
         </div>
-        <div className='mt-20'>
+        <div className='mt-20 flex flex-col sm:flex-row items-center sm:items-start gap-2'>
           <LinkItem href='/signup' msg='Sign up' />
           <LinkItem href='/login' msg='Login' />
         </div>
