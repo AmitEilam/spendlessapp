@@ -33,3 +33,21 @@ export async function deleteTransaction(id) {
 
   if (error) throw new Error('Transactions could not be deleted');
 }
+
+export async function updateTransaction(id, type, category, price, notes) {
+  const session = await auth();
+  if (!session) throw new Error('You must be logged in!');
+
+  const transactions = await getTransactionsByUser(session.user.id);
+  const transactionsIds = transactions.map((transaction) => transaction.id);
+
+  if (!transactionsIds.includes(id))
+    throw new Error('You are not allowed to edit this transaction');
+
+  const { error } = await supabase
+    .from('transactions')
+    .update({ type, category, price, notes })
+    .eq('id', id);
+
+  if (error) throw new Error('Transaction could not be updated');
+}

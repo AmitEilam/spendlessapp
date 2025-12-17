@@ -68,6 +68,9 @@ function Transaction({ category, price, type, date, notes, id }) {
         price={price}
         date={formattedDate}
         notes={notes}
+        id={id}
+        type={type}
+        rawCategory={category}
       />
     </>
   );
