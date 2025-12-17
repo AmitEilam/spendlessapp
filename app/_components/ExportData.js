@@ -108,7 +108,7 @@ function ExportData({ transactions, filter, timeFilter }) {
       title='Export filtered transactions to CSV'
     >
       <FiDownload className='mr-1' />
-      <span className='hidden sm:inline'>Export</span>
+      Export
     </button>
   );
 }
