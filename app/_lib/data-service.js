@@ -70,28 +70,38 @@ export async function getCurrentMonthTransactions(id) {
 }
 
 export async function getSumFixedByUser(id) {
+  const now = new Date();
+
   const { data, error } = await supabase
     .from('fixed')
     .select('*')
-    .eq('userId', id);
+    .eq('userId', id)
+    .lte('created_at', endOfMonth(now).toISOString())
+    .order('created_at', { ascending: false });
 
   if (error) {
     console.error(error);
     notFound();
   }
 
-  const result = data.reduce((acc, item) => {
+  // For each category/type, only use the most recent record
+  const latestByCategory = {};
+  data.forEach((item) => {
+    const key = `${item.type}-${item.category}`;
+    // Since data is ordered by created_at desc, first occurrence is the latest
+    if (!latestByCategory[key]) {
+      latestByCategory[key] = item;
+    }
+  });
+
+  const result = Object.values(latestByCategory).reduce((acc, item) => {
     const { category, type, price } = item;
 
     if (!acc[type]) {
       acc[type] = {};
     }
 
-    if (!acc[type][category]) {
-      acc[type][category] = 0;
-    }
-
-    acc[type][category] += price;
+    acc[type][category] = price;
 
     return acc;
   }, {});
@@ -116,36 +126,59 @@ export async function getMonthlyTrendsByUser(id) {
     notFound();
   }
 
-  // Fetch fixed expenses/income
+  // Fetch ALL fixed expenses/income (to find applicable ones per month)
   const { data: fixed, error: fixedError } = await supabase
     .from('fixed')
     .select('*')
-    .eq('userId', id);
+    .eq('userId', id)
+    .order('created_at', { ascending: false });
 
   if (fixedError) {
     console.error(fixedError);
     notFound();
   }
 
-  // Calculate fixed totals
-  const fixedTotals = fixed.reduce(
-    (acc, item) => {
-      if (item.type === 'expense') {
-        acc.expenses += item.price;
-      } else if (item.type === 'income') {
-        acc.income += item.price;
-      }
-      return acc;
-    },
-    { expenses: 0, income: 0 }
-  );
+  // Helper function to get fixed totals for a specific month
+  // Uses the most recent fixed record created before or during that month
+  const getFixedTotalsForMonth = (monthEnd) => {
+    const latestByCategory = {};
 
-  // Initialize the last 6 months with fixed values
+    fixed.forEach((item) => {
+      const itemDate = new Date(item.created_at);
+      // Only consider records created before or during this month
+      if (itemDate <= monthEnd) {
+        const key = `${item.type}-${item.category}`;
+        // Since data is ordered by created_at desc, first occurrence is the latest
+        if (!latestByCategory[key]) {
+          latestByCategory[key] = item;
+        }
+      }
+    });
+
+    return Object.values(latestByCategory).reduce(
+      (acc, item) => {
+        if (item.type === 'expense') {
+          acc.expenses += item.price;
+        } else if (item.type === 'income') {
+          acc.income += item.price;
+        }
+        return acc;
+      },
+      { expenses: 0, income: 0 }
+    );
+  };
+
+  // Initialize the last 6 months with their respective fixed values
   const monthlyData = {};
   for (let i = 5; i >= 0; i--) {
     const monthDate = subMonths(now, i);
     const monthKey = format(monthDate, 'yyyy-MM');
     const monthLabel = format(monthDate, 'MMM');
+    const monthEnd = endOfMonth(monthDate);
+
+    // Get fixed totals applicable to this specific month
+    const fixedTotals = getFixedTotalsForMonth(monthEnd);
+
     monthlyData[monthKey] = {
       month: monthLabel,
       expenses: fixedTotals.expenses,
