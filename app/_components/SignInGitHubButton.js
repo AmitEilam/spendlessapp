@@ -4,9 +4,9 @@ import { FaGithub } from 'react-icons/fa';
 function SignInGitHubButton() {
   return (
     <form action={signInWithGitHubAction}>
-      <button className='flex items-center sm:gap-6 gap-3 sm:text-lg text-sm border border-primary-300 px-6 py-4 font-medium rounded-full bg-gray-900 text-white hover:bg-gray-800 transition-colors'>
-        <FaGithub size={24} />
-        <span>Continue with GitHub</span>
+      <button className='flex items-center min-w-[280px] sm:text-lg text-sm border border-primary-300 px-6 py-4 font-medium rounded-full bg-white text-gray-900 hover:bg-gray-50 transition-colors'>
+        <FaGithub className='h-6 w-6' />
+        <span className='flex-1 text-center'>Continue with GitHub</span>
       </button>
     </form>
   );
