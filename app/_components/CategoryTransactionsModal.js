@@ -30,16 +30,16 @@ function CategoryTransactionsModal({ isOpen, onClose, category, transactions, ty
 
   return ReactDOM.createPortal(
     <div
-      className='fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50 p-4'
+      className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 z-50 p-4'
       onClick={onClose}
     >
       <div
-        className='bg-white dark:bg-gray-800 rounded-lg p-6 max-w-lg w-full max-h-[80vh] flex flex-col relative'
+        className='bg-white dark:bg-gray-900 rounded-lg p-6 max-w-lg w-full max-h-[80vh] flex flex-col relative shadow-xl dark:shadow-2xl dark:shadow-black/50 border border-gray-200 dark:border-gray-600'
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={onClose}
-          className='absolute top-4 right-4 text-primary-800 dark:text-purple-400'
+          className='absolute top-4 right-4 text-primary-800 dark:text-purple-300'
         >
           <IoClose size={24} />
         </button>
@@ -56,7 +56,7 @@ function CategoryTransactionsModal({ isOpen, onClose, category, transactions, ty
           </div>
         </div>
 
-        <div className={`text-2xl font-bold mb-4 ${type === 'expense' ? 'text-red-700' : 'text-green-700'}`}>
+        <div className={`text-2xl font-bold mb-4 ${type === 'expense' ? 'text-red-700 dark:text-red-400' : 'text-green-700 dark:text-green-400'}`}>
           {type === 'expense' ? '-' : ''}{total.toLocaleString('en-US')}₪
         </div>
 
@@ -78,7 +78,7 @@ function CategoryTransactionsModal({ isOpen, onClose, category, transactions, ty
                       </p>
                     )}
                   </div>
-                  <p className={`font-semibold ${type === 'expense' ? 'text-red-600' : 'text-green-600'}`}>
+                  <p className={`font-semibold ${type === 'expense' ? 'text-red-600 dark:text-red-400' : 'text-green-600 dark:text-green-400'}`}>
                     {type === 'expense' ? '-' : ''}{t.price.toLocaleString('en-US')}₪
                   </p>
                 </div>

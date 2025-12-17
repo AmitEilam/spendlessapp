@@ -32,13 +32,13 @@ function Modal({ modalRef, toggleModal, user }) {
   return (
     <>
       <div
-        className='fixed inset-0 bg-black opacity-50 z-40'
+        className='fixed inset-0 bg-black opacity-70 z-40'
         onClick={toggleModal}
       />
       <div className='fixed inset-0 flex items-center justify-center z-50 p-4'>
         <div
           ref={modalRef}
-          className='bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg max-w-lg w-full'
+          className='bg-white dark:bg-gray-900 p-8 rounded-lg shadow-lg max-w-lg w-full border border-gray-200 dark:border-gray-600'
         >
           <h2 className='text-xl font-bold mb-6'>Add New Transaction</h2>
           <form onSubmit={handleSubmit}>
@@ -109,7 +109,7 @@ function Modal({ modalRef, toggleModal, user }) {
               </button>
               <button
                 type='button'
-                className='text-primary-800 dark:text-purple-400 px-5 py-3 bg-white dark:bg-gray-700 text-lg font-semibold transition-all rounded-full border border-primary-800 dark:border-purple-400'
+                className='text-primary-800 dark:text-purple-300 px-5 py-3 bg-white dark:bg-gray-700 text-lg font-semibold transition-all rounded-full border border-primary-800 dark:border-purple-300'
                 onClick={toggleModal}
               >
                 Close

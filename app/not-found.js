@@ -8,7 +8,7 @@ function NotFound() {
       </h1>
       <Link
         href='/'
-        className='inline-block text-primary-800 px-6 py-3 text-lg'
+        className='inline-block text-primary-800 dark:text-purple-300 px-6 py-3 text-lg'
       >
         Go back home
       </Link>

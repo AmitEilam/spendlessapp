@@ -11,7 +11,7 @@ export default function Page() {
   return (
     <div className='grid grid-cols-5 gap-x-24 md:gap-y-32 gap-y-10 text-lg items-center'>
       <div className='md:col-span-3 col-span-5'>
-        <h1 className='text-4xl mb-10 text-primary-800 font-medium'>
+        <h1 className='text-4xl mb-10 text-primary-800 dark:text-purple-300 font-medium'>
           Managing Finances Today
         </h1>
 
@@ -43,7 +43,7 @@ export default function Page() {
       </div>
 
       <div className='md:col-span-3 col-span-5'>
-        <h1 className='text-4xl mb-10 text-primary-800 font-medium'>
+        <h1 className='text-4xl mb-10 text-primary-800 dark:text-purple-300 font-medium'>
           What the App Offers
         </h1>
 

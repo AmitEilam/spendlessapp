@@ -104,7 +104,7 @@ function ExportData({ transactions, filter, timeFilter }) {
     <button
       onClick={exportToCSV}
       disabled={isExporting}
-      className='flex items-center px-3 py-1 text-xs sm:text-base font-medium rounded-md border border-primary-800 dark:border-purple-400 bg-white dark:bg-gray-800 text-primary-800 dark:text-purple-400 hover:bg-primary-800 hover:text-white transition-colors disabled:opacity-50'
+      className='flex items-center px-3 py-1 text-xs sm:text-base font-medium rounded-md border border-primary-800 dark:border-purple-300 bg-white dark:bg-gray-800 text-primary-800 dark:text-purple-300 hover:bg-primary-800 hover:text-white dark:hover:bg-purple-600 transition-colors disabled:opacity-50'
       title='Export filtered transactions to CSV'
     >
       <FiDownload className='mr-1' />

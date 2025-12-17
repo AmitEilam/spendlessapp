@@ -53,7 +53,7 @@ export default async function Page() {
           fixedExpense={fixedExpense}
           fixedIncome={fixedIncome}
         />
-        <h2 className='font-medium text-red-800'>
+        <h2 className='font-medium text-red-800 dark:text-red-400'>
           Expenses this month by Category
         </h2>
         {transactionsSummary?.expense || fixed?.expense ? (
@@ -66,7 +66,7 @@ export default async function Page() {
         ) : (
           <MessageToUser>You don&apos;t have any expenses yet 👏🏻</MessageToUser>
         )}
-        <h2 className='font-medium text-green-800 mt-10'>
+        <h2 className='font-medium text-green-800 dark:text-green-400 mt-10'>
           Income this month by Category
         </h2>
         {transactionsSummary?.income || fixed?.income ? (

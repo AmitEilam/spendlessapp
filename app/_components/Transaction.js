@@ -41,7 +41,7 @@ function Transaction({ category, price, type, date, notes, id }) {
         <div className='flex items-center justify-center'>
           <button
             onClick={deleteHandler}
-            className='px-2 py-1 mr-2 text-xs font-bold rounded-full border bg-white text-primary-800'
+            className='px-2 py-1 mr-2 text-xs font-bold rounded-full border bg-white dark:bg-gray-700 text-primary-800 dark:text-purple-300 dark:border-gray-600'
           >
             X
           </button>
@@ -52,7 +52,7 @@ function Transaction({ category, price, type, date, notes, id }) {
         </div>
         <h1
           className={`text-2xl mt-1.5 ${
-            type === 'income' ? 'text-green-700' : 'text-red-700'
+            type === 'income' ? 'text-green-700 dark:text-green-400' : 'text-red-700 dark:text-red-400'
           }`}
         >
           {type === 'income'

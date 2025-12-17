@@ -78,16 +78,16 @@ function TransactionModal({
 
   return ReactDOM.createPortal(
     <div
-      className='fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50'
+      className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 z-50'
       onClick={onClose}
     >
       <div
-        className='bg-white dark:bg-gray-800 rounded-lg p-5 px-8 max-w-md w-full mx-4 relative'
+        className='bg-white dark:bg-gray-900 rounded-lg p-5 px-8 max-w-md w-full mx-4 relative shadow-xl dark:shadow-2xl dark:shadow-black/50 border border-gray-200 dark:border-gray-600'
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={onClose}
-          className='absolute top-4 right-4 text-primary-800 dark:text-purple-400'
+          className='absolute top-4 right-4 text-primary-800 dark:text-purple-300'
         >
           <IoClose size={24} />
         </button>
@@ -95,10 +95,10 @@ function TransactionModal({
         {!isEditing ? (
           <>
             <div className='flex items-center gap-2 mb-4'>
-              <h2 className='text-xl font-bold'>Transaction Details</h2>
+              <h2 className='text-xl font-bold dark:text-gray-100'>Transaction Details</h2>
               <button
                 onClick={() => setIsEditing(true)}
-                className='text-primary-800 dark:text-purple-400 hover:text-primary-600 dark:hover:text-purple-300 transition-colors'
+                className='text-primary-800 dark:text-purple-300 hover:text-primary-600 dark:hover:text-purple-200 transition-colors'
                 title='Edit transaction'
               >
                 <FiEdit2 size={18} />
@@ -106,15 +106,15 @@ function TransactionModal({
             </div>
             <div className='mb-4 flex'>
               <p className='font-semibold mr-2'>📅</p>
-              <p>{date}</p>
+              <p className='dark:text-gray-200'>{date}</p>
             </div>
             <div className='mb-4 flex'>
               <p className='font-semibold mr-2'>📍</p>
-              <p>{category}</p>
+              <p className='dark:text-gray-200'>{category}</p>
             </div>
             <div className='mb-4 flex'>
               <p className='font-semibold mr-2'>💰</p>
-              <p>
+              <p className='dark:text-gray-200'>
                 {price}
                 &#8362;
               </p>
@@ -122,15 +122,15 @@ function TransactionModal({
             {notes && (
               <div className='mb-4 flex'>
                 <p className='font-semibold mr-2'>📝</p>
-                <p>{notes}</p>
+                <p className='dark:text-gray-200'>{notes}</p>
               </div>
             )}
           </>
         ) : (
           <>
-            <h2 className='text-xl font-bold mb-6'>Edit Transaction</h2>
+            <h2 className='text-xl font-bold mb-6 dark:text-gray-100'>Edit Transaction</h2>
             <form onSubmit={handleSubmit}>
-              <label className='block mb-4'>
+              <label className='block mb-4 dark:text-gray-200'>
                 Type:
                 <select
                   value={editType}
@@ -142,7 +142,7 @@ function TransactionModal({
                   <option value='expense'>Expense</option>
                 </select>
               </label>
-              <label className='block mb-4'>
+              <label className='block mb-4 dark:text-gray-200'>
                 Category:
                 <select
                   value={editCategory}
@@ -159,7 +159,7 @@ function TransactionModal({
                   <option value='other'>Other</option>
                 </select>
               </label>
-              <label className='block mb-4'>
+              <label className='block mb-4 dark:text-gray-200'>
                 Price:
                 <input
                   type='number'
@@ -170,7 +170,7 @@ function TransactionModal({
                   required
                 />
               </label>
-              <label className='block mb-6'>
+              <label className='block mb-6 dark:text-gray-200'>
                 Notes:
                 <textarea
                   value={editNotes}
@@ -184,7 +184,7 @@ function TransactionModal({
               <div className='flex justify-end space-x-3'>
                 <button
                   type='button'
-                  className='text-primary-800 dark:text-purple-400 px-4 py-2 bg-white dark:bg-gray-700 text-sm font-semibold transition-all rounded-full border border-primary-800 dark:border-purple-400'
+                  className='text-primary-800 dark:text-purple-300 px-4 py-2 bg-white dark:bg-gray-700 text-sm font-semibold transition-all rounded-full border border-primary-800 dark:border-purple-300'
                   onClick={() => setIsEditing(false)}
                 >
                   Cancel

@@ -29,11 +29,11 @@ function Stat({ value, type, category, transactions = [], isFixed = false }) {
           <div>{title}</div>
         </div>
         {type === 'expense' ? (
-          <div className='font-medium text-2xl text-red-700 mt-3'>
+          <div className='font-medium text-2xl text-red-700 dark:text-red-400 mt-3'>
             -{value.toLocaleString('en-US')}&#8362;
           </div>
         ) : (
-          <div className='font-medium text-2xl text-green-700 mt-3'>
+          <div className='font-medium text-2xl text-green-700 dark:text-green-400 mt-3'>
             {value.toLocaleString('en-US')}&#8362;
           </div>
         )}
