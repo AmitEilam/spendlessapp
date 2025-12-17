@@ -1,12 +1,16 @@
 import Navigation from '@/app/_components/Navigation';
 import Logo from '@/app/_components/Logo';
+import DarkModeToggle from '@/app/_components/DarkModeToggle';
 
 function Header() {
   return (
-    <header className='border-b border-primary-800 border-opacity-10 sm:px-8 px-3 py-4'>
+    <header className='border-b border-primary-800 dark:border-gray-700 border-opacity-10 dark:border-opacity-100 sm:px-8 px-3 py-4 bg-white dark:bg-gray-800 transition-colors duration-200'>
       <div className='flex justify-between items-center max-w-full mx-auto'>
         <Logo />
-        <Navigation />
+        <div className='flex items-center gap-4'>
+          <DarkModeToggle />
+          <Navigation />
+        </div>
       </div>
     </header>
   );

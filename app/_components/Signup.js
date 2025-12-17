@@ -52,32 +52,32 @@ function Signup() {
 
   return (
     <div className='flex items-center justify-center mt-10'>
-      <div className='w-full max-w-md bg-white shadow-md rounded p-5'>
+      <div className='w-full max-w-md bg-white dark:bg-gray-800 shadow-md rounded-lg p-5'>
         <form onSubmit={handleSubmit}>
-          <h2 className='sm:text-2xl font-bold text-center text-gray-800 mb-10'>
+          <h2 className='sm:text-2xl font-bold text-center text-gray-800 dark:text-gray-100 mb-10'>
             🐷 Welcome! 👋🏼 <br />
             Sign up for free now
           </h2>
           <div className='mb-4'>
-            <label>Email:</label>
+            <label className='dark:text-gray-200'>Email:</label>
             <input
               type='email'
               maxLength={25}
               placeholder='example@example.com'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+              className='shadow appearance-none border dark:border-gray-600 rounded w-full py-2 px-3 text-gray-700 dark:text-gray-100 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline'
             />
           </div>
           <div className='relative mb-4'>
-            <label>Password:</label>
+            <label className='dark:text-gray-200'>Password:</label>
             <input
               type={showPassword ? 'text' : 'password'}
               maxLength={15}
               placeholder='Use strong password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
+              className='shadow appearance-none border dark:border-gray-600 rounded w-full py-2 px-3 text-gray-700 dark:text-gray-100 dark:bg-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
             />
             <button
               type='button'
@@ -92,25 +92,25 @@ function Signup() {
             </button>
           </div>
           <div className='mb-4'>
-            <label>First name:</label>
+            <label className='dark:text-gray-200'>First name:</label>
             <input
               type='text'
               placeholder='Type here ...'
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
-              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
+              className='shadow appearance-none border dark:border-gray-600 rounded w-full py-2 px-3 text-gray-700 dark:text-gray-100 dark:bg-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
             />
           </div>
           <div className='mb-6'>
-            <label>Last name:</label>
+            <label className='dark:text-gray-200'>Last name:</label>
             <input
               type='text'
               placeholder='Type here ...'
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
-              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
+              className='shadow appearance-none border dark:border-gray-600 rounded w-full py-2 px-3 text-gray-700 dark:text-gray-100 dark:bg-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
             />
-            <p className='text-red-700 text-center'>{err}</p>
+            <p className='text-red-500 text-center'>{err}</p>
           </div>
           <div className='flex items-center justify-center'>
             <button
@@ -122,9 +122,9 @@ function Signup() {
             </button>
           </div>
           <div className='flex items-center justify-center mt-8 mb-4'>
-            <div className='border-t border-gray-300 w-full mx-4'></div>
-            <span className='text-gray-500 px-4'>or</span>
-            <div className='border-t border-gray-300 w-full mx-4'></div>
+            <div className='border-t border-gray-300 dark:border-gray-600 w-full mx-4'></div>
+            <span className='text-gray-500 dark:text-gray-400 px-4'>or</span>
+            <div className='border-t border-gray-300 dark:border-gray-600 w-full mx-4'></div>
           </div>
         </form>
         <div className='flex flex-col justify-center items-center gap-3 m-7'>

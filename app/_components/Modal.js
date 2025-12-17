@@ -38,7 +38,7 @@ function Modal({ modalRef, toggleModal, user }) {
       <div className='fixed inset-0 flex items-center justify-center z-50 p-4'>
         <div
           ref={modalRef}
-          className='bg-white p-8 rounded-lg shadow-lg max-w-lg w-full'
+          className='bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg max-w-lg w-full'
         >
           <h2 className='text-xl font-bold mb-6'>Add New Transaction</h2>
           <form onSubmit={handleSubmit}>
@@ -47,7 +47,7 @@ function Modal({ modalRef, toggleModal, user }) {
               <select
                 value={type}
                 onChange={(e) => setType(e.target.value)}
-                className='border p-2 rounded w-full'
+                className='border dark:border-gray-600 p-2 rounded w-full bg-white dark:bg-gray-700 dark:text-gray-100'
                 required
               >
                 <option value='' disabled>
@@ -62,7 +62,7 @@ function Modal({ modalRef, toggleModal, user }) {
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className='border p-2 rounded w-full'
+                className='border dark:border-gray-600 p-2 rounded w-full bg-white dark:bg-gray-700 dark:text-gray-100'
                 required
               >
                 <option value='' disabled>
@@ -83,7 +83,7 @@ function Modal({ modalRef, toggleModal, user }) {
                 type='number'
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
-                className='border p-2 rounded w-full'
+                className='border dark:border-gray-600 p-2 rounded w-full bg-white dark:bg-gray-700 dark:text-gray-100'
                 placeholder='Enter Price'
                 required
               />
@@ -94,7 +94,7 @@ function Modal({ modalRef, toggleModal, user }) {
                 value={notes}
                 maxLength={35}
                 onChange={(e) => setNotes(e.target.value)}
-                className='border p-2 rounded w-full'
+                className='border dark:border-gray-600 p-2 rounded w-full bg-white dark:bg-gray-700 dark:text-gray-100'
                 placeholder='Not required, but recommended'
                 rows='4'
               />
@@ -109,7 +109,7 @@ function Modal({ modalRef, toggleModal, user }) {
               </button>
               <button
                 type='button'
-                className='text-primary-800 px-5 py-3 bg-white text-lg font-semibold transition-all rounded-full border border-primary-800'
+                className='text-primary-800 dark:text-purple-400 px-5 py-3 bg-white dark:bg-gray-700 text-lg font-semibold transition-all rounded-full border border-primary-800 dark:border-purple-400'
                 onClick={toggleModal}
               >
                 Close

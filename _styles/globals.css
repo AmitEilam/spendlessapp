@@ -73,4 +73,11 @@
 
 :root {
   --primary-color: #6b21a8;
+  --toast-bg: white;
+  --toast-color: #6b21a8;
+}
+
+.dark {
+  --toast-bg: #1f2937;
+  --toast-color: #e5e7eb;
 }

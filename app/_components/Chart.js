@@ -10,8 +10,11 @@ import {
   YAxis,
   LabelList,
 } from 'recharts';
+import { useTheme } from './ThemeProvider';
 
 function Chart({ expense, income, fixedExpense, fixedIncome }) {
+  const { darkMode } = useTheme();
+  
   const data = [
     {
       name: 'Expenses and Income',
@@ -31,6 +34,9 @@ function Chart({ expense, income, fixedExpense, fixedIncome }) {
     return formattedNumber;
   }
 
+  const gridColor = darkMode ? '#374151' : '#ccc';
+  const textColor = darkMode ? '#e5e7eb' : '#333';
+
   return (
     <div className='flex flex-wrap justify-center mb-12 mt-3'>
       <ResponsiveContainer width='70%' height={300}>
@@ -43,11 +49,17 @@ function Chart({ expense, income, fixedExpense, fixedIncome }) {
             bottom: 5,
           }}
         >
-          <CartesianGrid strokeDasharray='3 3' />
-          <XAxis />
-          <YAxis />
-          <Tooltip />
-          <Legend />
+          <CartesianGrid strokeDasharray='3 3' stroke={gridColor} />
+          <XAxis tick={{ fill: textColor }} />
+          <YAxis tick={{ fill: textColor }} />
+          <Tooltip
+            contentStyle={{
+              backgroundColor: darkMode ? '#1f2937' : 'white',
+              border: darkMode ? '1px solid #374151' : '1px solid #ccc',
+              color: textColor,
+            }}
+          />
+          <Legend wrapperStyle={{ color: textColor }} />
           <Bar dataKey='expenses' fill='#D25653'>
             <LabelList
               dataKey='expenses'

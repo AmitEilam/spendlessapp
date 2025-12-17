@@ -82,12 +82,12 @@ function TransactionModal({
       onClick={onClose}
     >
       <div
-        className='bg-white rounded-lg p-5 px-8 max-w-md w-full mx-4 relative'
+        className='bg-white dark:bg-gray-800 rounded-lg p-5 px-8 max-w-md w-full mx-4 relative'
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={onClose}
-          className='absolute top-4 right-4 text-primary-800'
+          className='absolute top-4 right-4 text-primary-800 dark:text-purple-400'
         >
           <IoClose size={24} />
         </button>
@@ -98,7 +98,7 @@ function TransactionModal({
               <h2 className='text-xl font-bold'>Transaction Details</h2>
               <button
                 onClick={() => setIsEditing(true)}
-                className='text-primary-800 hover:text-primary-600 transition-colors'
+                className='text-primary-800 dark:text-purple-400 hover:text-primary-600 dark:hover:text-purple-300 transition-colors'
                 title='Edit transaction'
               >
                 <FiEdit2 size={18} />
@@ -135,7 +135,7 @@ function TransactionModal({
                 <select
                   value={editType}
                   onChange={(e) => setEditType(e.target.value)}
-                  className='border p-2 rounded w-full'
+                  className='border dark:border-gray-600 p-2 rounded w-full bg-white dark:bg-gray-700 dark:text-gray-100'
                   required
                 >
                   <option value='income'>Income</option>
@@ -147,7 +147,7 @@ function TransactionModal({
                 <select
                   value={editCategory}
                   onChange={(e) => setEditCategory(e.target.value)}
-                  className='border p-2 rounded w-full'
+                  className='border dark:border-gray-600 p-2 rounded w-full bg-white dark:bg-gray-700 dark:text-gray-100'
                   required
                 >
                   <option value='nightout'>Nightout</option>
@@ -165,7 +165,7 @@ function TransactionModal({
                   type='number'
                   value={editPrice}
                   onChange={(e) => setEditPrice(e.target.value)}
-                  className='border p-2 rounded w-full'
+                  className='border dark:border-gray-600 p-2 rounded w-full bg-white dark:bg-gray-700 dark:text-gray-100'
                   placeholder='Enter Price'
                   required
                 />
@@ -176,7 +176,7 @@ function TransactionModal({
                   value={editNotes}
                   maxLength={35}
                   onChange={(e) => setEditNotes(e.target.value)}
-                  className='border p-2 rounded w-full'
+                  className='border dark:border-gray-600 p-2 rounded w-full bg-white dark:bg-gray-700 dark:text-gray-100'
                   placeholder='Not required, but recommended'
                   rows='3'
                 />
@@ -184,7 +184,7 @@ function TransactionModal({
               <div className='flex justify-end space-x-3'>
                 <button
                   type='button'
-                  className='text-primary-800 px-4 py-2 bg-white text-sm font-semibold transition-all rounded-full border border-primary-800'
+                  className='text-primary-800 dark:text-purple-400 px-4 py-2 bg-white dark:bg-gray-700 text-sm font-semibold transition-all rounded-full border border-primary-800 dark:border-purple-400'
                   onClick={() => setIsEditing(false)}
                 >
                   Cancel

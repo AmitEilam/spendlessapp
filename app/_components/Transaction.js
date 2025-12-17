@@ -36,7 +36,7 @@ function Transaction({ category, price, type, date, notes, id }) {
     <>
       <div
         onClick={toggleModal}
-        className={`flex justify-between bg-white shadow-md rounded-lg p-6 max-w-2xl mx-auto my-4 border border-gray-200 inner-border-left ${borderColor} transition-transform transform  hover:shadow-lg fade-in`}
+        className={`flex justify-between bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 max-w-2xl mx-auto my-4 border border-gray-200 dark:border-gray-700 inner-border-left ${borderColor} transition-transform transform hover:shadow-lg fade-in`}
       >
         <div className='flex items-center justify-center'>
           <button

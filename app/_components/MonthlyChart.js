@@ -10,8 +10,11 @@ import {
   YAxis,
   LabelList,
 } from 'recharts';
+import { useTheme } from './ThemeProvider';
 
 function MonthlyChart({ data }) {
+  const { darkMode } = useTheme();
+
   if (!data || data.length === 0) return null;
 
   // Transform data for the chart (expenses as negative for visual comparison)
@@ -32,6 +35,9 @@ function MonthlyChart({ data }) {
     return Math.abs(value).toLocaleString('en-US') + '₪';
   }
 
+  const gridColor = darkMode ? '#374151' : '#ccc';
+  const textColor = darkMode ? '#e5e7eb' : '#333';
+
   return (
     <div className='flex flex-wrap justify-center mb-12 mt-3'>
       <ResponsiveContainer width='90%' height={350}>
@@ -44,19 +50,20 @@ function MonthlyChart({ data }) {
             bottom: 5,
           }}
         >
-          <CartesianGrid strokeDasharray='3 3' />
-          <XAxis dataKey='month' tick={{ fontSize: 12 }} />
-          <YAxis tickFormatter={formatNumber} />
+          <CartesianGrid strokeDasharray='3 3' stroke={gridColor} />
+          <XAxis dataKey='month' tick={{ fontSize: 12, fill: textColor }} />
+          <YAxis tickFormatter={formatNumber} tick={{ fill: textColor }} />
           <Tooltip
             formatter={formatTooltip}
-            labelStyle={{ color: '#333', fontWeight: 'bold' }}
+            labelStyle={{ color: textColor, fontWeight: 'bold' }}
             contentStyle={{
-              backgroundColor: 'white',
-              border: '1px solid #ddd',
+              backgroundColor: darkMode ? '#1f2937' : 'white',
+              border: darkMode ? '1px solid #374151' : '1px solid #ddd',
               borderRadius: '8px',
+              color: textColor,
             }}
           />
-          <Legend />
+          <Legend wrapperStyle={{ color: textColor }} />
           <Bar
             dataKey='expenses'
             name='Expenses'

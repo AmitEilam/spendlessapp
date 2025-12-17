@@ -43,13 +43,13 @@ function NewAccount({ user }) {
 
   return (
     <div className='flex justify-center items-center'>
-      <form onSubmit={submitHandler} className='border p-10 bg-white'>
-        <h2 className='sm:text-2xl text-lg font-bold text-center text-gray-800 mb-10'>
+      <form onSubmit={submitHandler} className='border dark:border-gray-700 p-10 bg-white dark:bg-gray-800 rounded-lg shadow-md'>
+        <h2 className='sm:text-2xl text-lg font-bold text-center text-gray-800 dark:text-gray-100 mb-10'>
           🐷 Hi! 👋🏼 <br />
           We need a few details to start
         </h2>
         <div className='mb-4'>
-          <label>What is your regular income? (salary, etc.)</label>
+          <label className='dark:text-gray-200'>What is your regular income? (salary, etc.)</label>
           <input
             type='number'
             placeholder='Type here ...'
@@ -57,12 +57,12 @@ function NewAccount({ user }) {
             min={1}
             value={salary}
             onChange={(e) => setSalary(e.target.value)}
-            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            className='shadow appearance-none border dark:border-gray-600 rounded w-full py-2 px-3 text-gray-700 dark:text-gray-100 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline'
             required
           />
         </div>
         <div className='mb-4'>
-          <label>What is the rent you pay? (if any. otherwise leave it)</label>
+          <label className='dark:text-gray-200'>What is the rent you pay? (if any. otherwise leave it)</label>
           <input
             type='number'
             placeholder='Type here ...'
@@ -70,11 +70,11 @@ function NewAccount({ user }) {
             min={0}
             value={rent}
             onChange={(e) => setRent(e.target.value)}
-            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            className='shadow appearance-none border dark:border-gray-600 rounded w-full py-2 px-3 text-gray-700 dark:text-gray-100 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline'
           />
         </div>
         <div className='mb-6'>
-          <label>
+          <label className='dark:text-gray-200'>
             What is your current expenses? (electricity, water, gas, property
             tax, internet, etc. )
           </label>
@@ -85,10 +85,10 @@ function NewAccount({ user }) {
             min={1}
             value={currentExpenses}
             onChange={(e) => setCurrentExpenses(e.target.value)}
-            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
+            className='shadow appearance-none border dark:border-gray-600 rounded w-full py-2 px-3 text-gray-700 dark:text-gray-100 dark:bg-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
             required
           />
-          <p className='text-red-700 text-center'></p>
+          <p className='text-red-500 text-center'></p>
         </div>
         <div className='flex items-center justify-center'>
           <button
