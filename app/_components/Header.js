@@ -6,11 +6,11 @@ function Header() {
   return (
     <header className='border-b border-primary-800 dark:border-gray-700 border-opacity-10 dark:border-opacity-100 sm:px-8 px-3 py-4 bg-white dark:bg-gray-800 transition-colors duration-200'>
       <div className='flex justify-between items-center max-w-full mx-auto'>
-        <Logo />
-        <div className='flex items-center gap-4'>
+        <div className='flex items-center gap-3'>
+          <Logo />
           <DarkModeToggle />
-          <Navigation />
         </div>
+        <Navigation />
       </div>
     </header>
   );
