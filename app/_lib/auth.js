@@ -1,5 +1,6 @@
 import NextAuth from 'next-auth';
 import Google from 'next-auth/providers/google';
+import GitHub from 'next-auth/providers/github';
 import Credentials from 'next-auth/providers/credentials';
 import { createUser, getUser } from './data-service';
 
@@ -8,6 +9,10 @@ const authConfig = {
     Google({
       clientId: process.env.AUTH_GOOGLE_ID,
       clientSecret: process.env.AUTH_GOOGLE_SECRET,
+    }),
+    GitHub({
+      clientId: process.env.AUTH_GITHUB_ID,
+      clientSecret: process.env.AUTH_GITHUB_SECRET,
     }),
     Credentials({
       name: 'Credentials',
@@ -33,13 +38,24 @@ const authConfig = {
       try {
         const existingUser = await getUser(user.email);
 
-        if (!existingUser)
+        if (!existingUser) {
+          // GitHub uses 'name' field, Google uses 'given_name' and 'family_name'
+          let firstName = profile?.given_name || '';
+          let lastName = profile?.family_name || '';
+
+          if (account?.provider === 'github' && profile?.name) {
+            const nameParts = profile.name.split(' ');
+            firstName = nameParts[0] || '';
+            lastName = nameParts.slice(1).join(' ') || '';
+          }
+
           await createUser({
             email: user.email,
-            firstName: profile?.given_name || '',
-            lastName: profile?.family_name || '',
-            password: user.password,
+            firstName,
+            lastName,
+            password: null,
           });
+        }
 
         return true;
       } catch {

@@ -7,6 +7,10 @@ export async function signInAction() {
   await signIn('google', { redirectTo: '/dashboard' });
 }
 
+export async function signInWithGitHubAction() {
+  await signIn('github', { redirectTo: '/dashboard' });
+}
+
 export async function signInRegularAction(email, password) {
   await signIn('credentials', { redirectTo: '/dashboard', email, password });
 }

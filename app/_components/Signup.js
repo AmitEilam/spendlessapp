@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import SignInGoogleButton from './SignInGoogleButton';
+import SignInGitHubButton from './SignInGitHubButton';
 import { createUser } from '../_lib/data-service';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
@@ -126,8 +127,9 @@ function Signup() {
             <div className='border-t border-gray-300 w-full mx-4'></div>
           </div>
         </form>
-        <div className='flex justify-center items-center m-7'>
+        <div className='flex flex-col justify-center items-center gap-3 m-7'>
           <SignInGoogleButton />
+          <SignInGitHubButton />
         </div>
       </div>
     </div>

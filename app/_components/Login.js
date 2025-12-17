@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import SignInGoogleButton from './SignInGoogleButton';
+import SignInGitHubButton from './SignInGitHubButton';
 import { signInRegularAction } from '../_lib/actions';
 import { RiEyeCloseFill, RiEyeCloseLine } from 'react-icons/ri';
 import SpinnerMini from './SpinnerMini';
@@ -91,8 +92,9 @@ function Login() {
             <div className='border-t border-gray-300 w-full mx-4'></div>
           </div>
         </form>
-        <div className='flex flex-col justify-center items-center m-7'>
+        <div className='flex flex-col justify-center items-center gap-3 m-7'>
           <SignInGoogleButton />
+          <SignInGitHubButton />
           <LinkItemSignUp href='/signup' msg='Sign up for free' />
         </div>
       </div>
