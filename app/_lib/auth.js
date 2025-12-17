@@ -49,7 +49,7 @@ const authConfig = {
     async session({ session, user }) {
       const guest = await getUser(session.user.email);
       session.user.id = guest.id;
-      session.user.name = guest.firstName + ' ' + guest.lastame;
+      session.user.name = guest.firstName + ' ' + guest.lastName;
       return session;
     },
   },

@@ -3,48 +3,42 @@ import { getTransactionsByUser } from '../_lib/data-service';
 import MessageToUser from './MessageToUser';
 import Transaction from './Transaction';
 
+const TIME_FILTER_MONTHS = {
+  lastMonth: 0,
+  last3Months: 3,
+  last6Months: 6,
+  lastYear: 12,
+};
+
 async function TransactionsList({ filter, user, timeFilter }) {
   const transactions = await getTransactionsByUser(user);
   if (!transactions.length) return null;
 
-  let filteredTransactions = transactions;
-
-  // Time
   const now = new Date();
 
+  // Calculate the cutoff date once based on timeFilter
+  let cutoffDate;
   if (timeFilter === 'lastMonth') {
-    const startOfLastMonth = startOfMonth(now);
-    filteredTransactions = filteredTransactions.filter(
-      (trans) => new Date(trans.created_at) >= startOfLastMonth
-    );
-  } else if (timeFilter === 'last3Months') {
-    const last3Months = subMonths(now, 3);
-    filteredTransactions = filteredTransactions.filter(
-      (trans) => new Date(trans.created_at) >= last3Months
-    );
-  } else if (timeFilter === 'last6Months') {
-    const last6Months = subMonths(now, 6);
-    filteredTransactions = filteredTransactions.filter(
-      (trans) => new Date(trans.created_at) >= last6Months
-    );
-  } else if (timeFilter === 'lastYear') {
-    const lastYear = subMonths(now, 12);
-    filteredTransactions = filteredTransactions.filter(
-      (trans) => new Date(trans.created_at) >= lastYear
-    );
+    cutoffDate = startOfMonth(now);
+  } else if (TIME_FILTER_MONTHS[timeFilter] !== undefined) {
+    cutoffDate = subMonths(now, TIME_FILTER_MONTHS[timeFilter]);
   }
 
-  // Type
-  if (filter === 'all') {
-  } else if (filter === 'expenses') {
-    filteredTransactions = filteredTransactions.filter(
-      (trans) => trans.type === 'expense'
-    );
-  } else if (filter === 'income') {
-    filteredTransactions = filteredTransactions.filter(
-      (trans) => trans.type === 'income'
-    );
-  }
+  // Apply both filters in a single pass
+  const filteredTransactions = transactions.filter((trans) => {
+    // Time filter
+    if (cutoffDate && new Date(trans.created_at) < cutoffDate) {
+      return false;
+    }
+    // Type filter
+    if (filter === 'expenses' && trans.type !== 'expense') {
+      return false;
+    }
+    if (filter === 'income' && trans.type !== 'income') {
+      return false;
+    }
+    return true;
+  });
 
   return (
     <div>

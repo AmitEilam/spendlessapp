@@ -3,7 +3,7 @@ import { deleteTransaction } from '../_lib/actions';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import { handlerCategory } from '../_utils/categoryUtils';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import TransactionModal from './TransactionModal';
 import { format } from 'date-fns';
 
@@ -11,32 +11,26 @@ function Transaction({ category, price, type, date, notes, id }) {
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const formattedDate = format(date, 'dd.MM.yy');
-  let borderColor;
 
   const { title, iconCat, bgColor } = handlerCategory(category, 'transaction');
+  const borderColor = type === 'income' ? 'inner-border-green' : 'inner-border-red';
 
-  function deleteHandler(e) {
+  const deleteHandler = useCallback(async (e) => {
     e.stopPropagation();
     if (confirm('Are you sure you want to delete this transaction?')) {
       try {
-        deleteTransaction(id);
+        await deleteTransaction(id);
         toast.success('Transaction successfully deleted! 🐷');
+        router.refresh();
       } catch {
         toast.error('Failed to delete transaction! 💔');
       }
     }
-    router.refresh();
-  }
+  }, [id, router]);
 
-  const toggleModal = () => {
+  const toggleModal = useCallback(() => {
     setIsModalOpen((prev) => !prev);
-  };
-
-  if (type === 'income') {
-    borderColor = 'inner-border-green';
-  } else {
-    borderColor = 'inner-border-red';
-  }
+  }, []);
 
   return (
     <>
@@ -51,16 +45,14 @@ function Transaction({ category, price, type, date, notes, id }) {
           >
             X
           </button>
-          <div
-            className={`${bgColor} text-${iconCat} text-2xl rounded-full p-2 m-1`}
-          >
+          <div className={`${bgColor} text-2xl rounded-full p-2 m-1`}>
             {iconCat}
           </div>
           <h1 className='text-xl ml-1'>{title}</h1>
         </div>
         <h1
           className={`text-2xl mt-1.5 ${
-            type === 'income' ? 'text-green-700' : ' text-red-700'
+            type === 'income' ? 'text-green-700' : 'text-red-700'
           }`}
         >
           {type === 'income'

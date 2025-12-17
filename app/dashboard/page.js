@@ -1,6 +1,5 @@
 import Stats from '../_components/Stats';
 import Chart from '../_components/Chart';
-
 import { auth } from '../_lib/auth';
 import {
   getSumFixedByUser,
@@ -15,49 +14,24 @@ export const metadata = {
   title: 'Dashboard / SpendLess',
 };
 
+// Helper to sum object values
+const sumValues = (obj) =>
+  obj ? Object.values(obj).reduce((acc, curr) => acc + curr, 0) : 0;
+
 export default async function Page() {
   const session = await auth();
   const transactions = await getSumTransactionsByUser(session.user.id);
   const fixed = await getSumFixedByUser(session.user.id);
-  let expense = '';
-  let income = '';
-  let fixedExpense = '';
-  let fixedIncome = '';
 
-  if (fixed?.expense)
-    fixedExpense = Object?.values(fixed?.expense).reduce(
-      (acc, curr) => acc + curr,
-      0
-    );
-
-  if (fixed?.income)
-    fixedIncome = Object?.values(fixed?.income).reduce(
-      (acc, curr) => acc + curr,
-      0
-    );
-
-  if (transactions?.expense && transactions?.income) {
-    expense = Object?.values(transactions?.expense).reduce(
-      (acc, curr) => acc + curr,
-      0
-    );
-    income = Object?.values(transactions?.income).reduce(
-      (acc, curr) => acc + curr,
-      0
-    );
-  } else if (transactions?.expense && !transactions?.income) {
-    expense = Object?.values(transactions?.expense).reduce(
-      (acc, curr) => acc + curr,
-      0
-    );
-  } else if (transactions?.income && !transactions?.expense) {
-    income = Object?.values(transactions?.income).reduce(
-      (acc, curr) => acc + curr,
-      0
-    );
-  } else if (!fixed?.expense && !fixed?.income) {
+  // Redirect if user has no fixed data (new account)
+  if (!fixed?.expense && !fixed?.income) {
     redirect('/newAccount');
   }
+
+  const expense = sumValues(transactions?.expense);
+  const income = sumValues(transactions?.income);
+  const fixedExpense = sumValues(fixed?.expense);
+  const fixedIncome = sumValues(fixed?.income);
 
   return (
     <>
@@ -84,7 +58,7 @@ export default async function Page() {
             type='expense'
           />
         ) : (
-          <MessageToUser>You dont have any expenses yet 👏🏻</MessageToUser>
+          <MessageToUser>You don&apos;t have any expenses yet 👏🏻</MessageToUser>
         )}
         <h2 className='font-medium text-green-800 mt-10'>
           Income this month by Category
@@ -96,7 +70,7 @@ export default async function Page() {
             type='income'
           />
         ) : (
-          <MessageToUser>You dont have any Income yet 🤨</MessageToUser>
+          <MessageToUser>You don&apos;t have any income yet 🤨</MessageToUser>
         )}
       </div>
     </>

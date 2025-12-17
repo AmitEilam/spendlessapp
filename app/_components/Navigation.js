@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { AiOutlineDashboard } from 'react-icons/ai';
 import { HiArrowsUpDown } from 'react-icons/hi2';
 import { RiInformation2Line } from 'react-icons/ri';
@@ -14,7 +15,7 @@ export default async function Navigation() {
       <ul className='flex gap-3 items-center sm:gap-10 lg:gap-16'>
         {session ? (
           <>
-            <NavigationItem href={'/dashboard'} name='Dashboard'>
+            <NavigationItem href='/dashboard' name='Dashboard'>
               <AiOutlineDashboard className='m-1' />
             </NavigationItem>
             <NavigationItem href='/transactions' name='Transactions'>
@@ -28,10 +29,12 @@ export default async function Navigation() {
         )}
         <NavigationItem href='/profile'>
           {session?.user?.image ? (
-            <img
-              className='h-5 rounded-full m-1'
-              src={session?.user?.image}
-              alt={session?.user?.name}
+            <Image
+              className='rounded-full m-1'
+              src={session.user.image}
+              alt={session.user.name || 'Profile'}
+              width={20}
+              height={20}
               referrerPolicy='no-referrer'
             />
           ) : (
@@ -42,7 +45,7 @@ export default async function Navigation() {
           </span>
         </NavigationItem>
         <li className='ml-7 -mr-3 sm:ml-0 sm:mr-0'>
-          {session ? <SignOutButton /> : ''}
+          {session && <SignOutButton />}
         </li>
       </ul>
     </nav>

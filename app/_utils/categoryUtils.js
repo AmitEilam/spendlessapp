@@ -60,11 +60,6 @@ export function handlerCategory(category, source) {
       iconCat = <FaMoneyCheckAlt />;
       bgColor = 'bg-blue-300 text-blue-800';
       break;
-    case 'rent':
-      title = 'Rent';
-      iconCat = <FaHome />;
-      bgColor = 'bg-cyan-300 text-cyan-800';
-      break;
     default:
       title = 'Unknown title';
       iconCat = 'bg-purple-300 text-primary-800';

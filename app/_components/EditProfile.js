@@ -44,10 +44,9 @@ function EditProfile({
       if (rent) await updateFixed(user, 'rent', +rent);
       await updateUser(user, email, password, firstName, lastName);
       toast.success('Your details successfully added! 🐷');
-    } catch (error) {
+    } catch {
       toast.error('Failed to update the details! 💔');
       setErr('*Invalid details 🧐');
-      console.log(error);
     } finally {
       setIsSubmitting(false);
       router.refresh();
@@ -125,10 +124,8 @@ function EditProfile({
                   <RiEyeCloseFill className='h-5 w-5 text-gray-400' />
                 )}
               </button>
-            </div>{' '}
+            </div>
           </>
-        ) : (
-          ''
         )}
         <div className='mb-4'>
           <label>What is your regular income? (salary, etc.)</label>
@@ -167,7 +164,7 @@ function EditProfile({
             className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
             required
           />
-          <p className='text-red-700 text-center'></p>
+          {err && <p className='text-red-700 text-center'>{err}</p>}
         </div>
         <div className='flex items-center justify-center'>
           <button

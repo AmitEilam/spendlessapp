@@ -1,5 +1,4 @@
 import { notFound } from 'next/navigation';
-import NotFound from '../not-found';
 import { supabase } from './supabase';
 import { endOfMonth, startOfMonth } from 'date-fns';
 
@@ -28,11 +27,11 @@ export async function getSumTransactionsByUser(id) {
 
   if (error) {
     console.error(error);
-    NotFound();
+    notFound();
   }
 
-  const result = data.reduce((acc, data) => {
-    const { category, type, price } = data;
+  const result = data.reduce((acc, item) => {
+    const { category, type, price } = item;
 
     if (!acc[type]) {
       acc[type] = {};
@@ -49,6 +48,7 @@ export async function getSumTransactionsByUser(id) {
 
   return result;
 }
+
 export async function getSumFixedByUser(id) {
   const { data, error } = await supabase
     .from('fixed')
@@ -57,11 +57,11 @@ export async function getSumFixedByUser(id) {
 
   if (error) {
     console.error(error);
-    NotFound();
+    notFound();
   }
 
-  const result = data.reduce((acc, data) => {
-    const { category, type, price } = data;
+  const result = data.reduce((acc, item) => {
+    const { category, type, price } = item;
 
     if (!acc[type]) {
       acc[type] = {};
@@ -88,13 +88,13 @@ export async function getTransactionsByUser(id) {
 
   if (error) {
     console.error(error);
-    NotFound();
+    notFound();
   }
 
   return data;
 }
 
-export async function getTransactionsByUserAndFiler(id, filter) {
+export async function getTransactionsByUserAndFilter(id, filter) {
   const { data, error } = await supabase
     .from('transactions')
     .select('*')
@@ -103,7 +103,7 @@ export async function getTransactionsByUserAndFiler(id, filter) {
 
   if (error) {
     console.error(error);
-    NotFound();
+    notFound();
   }
 
   return data;

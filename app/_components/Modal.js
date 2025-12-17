@@ -11,7 +11,6 @@ function Modal({ modalRef, toggleModal, user }) {
   const [price, setPrice] = useState('');
   const [notes, setNotes] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [err, setErr] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,17 +18,14 @@ function Modal({ modalRef, toggleModal, user }) {
     if (!type || !category || !price) return;
     setIsSubmitting(true);
     try {
-      setErr('');
       await createTransaction(user, type, category, price, notes);
       toggleModal();
       toast.success('Transaction successfully added! 🐷');
+      router.refresh();
     } catch (error) {
       toast.error('Failed to add transaction! 💔');
-      setErr('*Invalid email or password 🧐');
-      console.log(err);
     } finally {
       setIsSubmitting(false);
-      router.refresh();
     }
   };
 
