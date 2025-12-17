@@ -16,6 +16,8 @@ export default async function Home() {
         className='relative object-cover object-bottom blur-[2px]'
         alt='home-background'
       />
+      {/* Dark overlay for dark mode */}
+      <div className='hidden dark:block fixed inset-0 bg-gray-900 bg-opacity-70 z-[1]'></div>
       <div className='relative z-10 text-center mt-10'>
         <LogoWithoutText />
         <h1 className='text-6xl text-primary-800 dark:text-purple-300 mb-2 mt-1 tracking-tight font-n'>
