@@ -16,15 +16,26 @@ function Filter() {
   const endDate = searchParams.get('endDate') ?? '';
 
   const [showCustomDates, setShowCustomDates] = useState(false);
-  const [searchInput, setSearchInput] = useState(searchQuery);
+  const [searchInput, setSearchInput] = useState('');
 
-  // Reset custom dates on page load
+  // Reset filters on page load
   useEffect(() => {
+    const params = new URLSearchParams(searchParams);
+    let needsUpdate = false;
+
     if (startDate || endDate || activeTimeFilter === 'custom') {
-      const params = new URLSearchParams(searchParams);
       params.delete('startDate');
       params.delete('endDate');
       params.set('timeFilter', 'lastMonth');
+      needsUpdate = true;
+    }
+
+    if (searchQuery) {
+      params.delete('search');
+      needsUpdate = true;
+    }
+
+    if (needsUpdate) {
       router.replace(`${pathname}?${params.toString()}`, { scroll: false });
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -74,8 +85,18 @@ function Filter() {
     updateParams('timeFilter', timeFilter);
   }
 
-  function handleDateChange(key, value) {
-    updateParams(key, value);
+  function handleStartDateChange(value) {
+    // Validate: start date can't be after end date or today
+    if (endDate && value > endDate) return;
+    if (value > today) return;
+    updateParams('startDate', value);
+  }
+
+  function handleEndDateChange(value) {
+    // Validate: end date can't be before start date or after today
+    if (startDate && value < startDate) return;
+    if (value > today) return;
+    updateParams('endDate', value);
   }
 
   function clearSearch() {
@@ -93,14 +114,14 @@ function Filter() {
 
   return (
     <div className='flex flex-col w-full'>
-      {/* Search Input */}
+      {/* Search Input - text-base (16px) prevents iOS zoom */}
       <div className='relative p-2'>
         <input
           type='text'
           placeholder='Search transactions...'
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
-          className='w-full px-4 py-2 pr-10 text-sm border border-gray-300 dark:border-gray-600 rounded-full bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-800 dark:focus:ring-purple-400'
+          className='w-full px-4 py-2 pr-10 text-base border border-gray-300 dark:border-gray-600 rounded-full bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-800 dark:focus:ring-purple-400'
         />
         {searchInput && (
           <button
@@ -157,8 +178,8 @@ function Filter() {
               type='date'
               value={startDate}
               max={endDate || today}
-              onChange={(e) => handleDateChange('startDate', e.target.value)}
-              className='px-2 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100'
+              onChange={(e) => handleStartDateChange(e.target.value)}
+              className='px-2 py-1 text-base border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100'
             />
           </div>
           <div className='flex items-center gap-2'>
@@ -168,8 +189,8 @@ function Filter() {
               value={endDate}
               min={startDate}
               max={today}
-              onChange={(e) => handleDateChange('endDate', e.target.value)}
-              className='px-2 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100'
+              onChange={(e) => handleEndDateChange(e.target.value)}
+              className='px-2 py-1 text-base border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100'
             />
           </div>
           {(startDate || endDate) && (
