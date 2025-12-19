@@ -22,6 +22,7 @@ export default async function Page({ searchParams }) {
   const startDate = searchParams?.startDate ?? '';
   const endDate = searchParams?.endDate ?? '';
   const page = parseInt(searchParams?.page) || 1;
+  const sort = searchParams?.sort ?? 'newest';
 
   return (
     <>
@@ -41,7 +42,7 @@ export default async function Page({ searchParams }) {
           <div className='flex justify-between max-w-2xl mx-auto items-center'>
             <Filter />
           </div>
-          <Suspense fallback={<Spinner />} key={`${filter}-${timeFilter}-${search}-${startDate}-${endDate}-${page}`}>
+          <Suspense fallback={<Spinner />} key={`${filter}-${timeFilter}-${search}-${startDate}-${endDate}-${page}-${sort}`}>
             <TransactionsList
               filter={filter}
               timeFilter={timeFilter}
@@ -49,6 +50,7 @@ export default async function Page({ searchParams }) {
               startDate={startDate}
               endDate={endDate}
               page={page}
+              sort={sort}
               user={userId}
             />
           </Suspense>

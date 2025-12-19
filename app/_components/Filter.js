@@ -14,6 +14,7 @@ function Filter() {
   const searchQuery = searchParams.get('search') ?? '';
   const startDate = searchParams.get('startDate') ?? '';
   const endDate = searchParams.get('endDate') ?? '';
+  const sort = searchParams.get('sort') ?? 'newest';
 
   const [showCustomDates, setShowCustomDates] = useState(false);
   const [searchInput, setSearchInput] = useState('');
@@ -114,6 +115,10 @@ function Filter() {
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   }
 
+  function handleSort(newSort) {
+    updateParams('sort', newSort);
+  }
+
   const today = new Date().toISOString().split('T')[0];
 
   return (
@@ -137,9 +142,9 @@ function Filter() {
         )}
       </div>
 
-      {/* Type Filter */}
-      <div className='flex justify-between items-center'>
-        <div className='flex space-x-2 p-2'>
+      {/* Type Filter + Sort */}
+      <div className='flex justify-between items-center p-2'>
+        <div className='flex space-x-2'>
           <FilterBtn filter='all' handleFilter={handleFilter} activeFilter={activeFilter}>
             All
           </FilterBtn>
@@ -149,6 +154,21 @@ function Filter() {
           <FilterBtn filter='income' handleFilter={handleFilter} activeFilter={activeFilter}>
             Income
           </FilterBtn>
+        </div>
+        <div className='relative'>
+          <select
+            value={sort}
+            onChange={(e) => handleSort(e.target.value)}
+            className='pl-3 pr-10 py-1 text-base rounded-full border border-primary-800 dark:border-purple-300 bg-white dark:bg-gray-800 text-primary-800 dark:text-purple-300 focus:outline-none focus:ring-2 focus:ring-primary-800 dark:focus:ring-purple-400 appearance-none cursor-pointer'
+          >
+            <option value='newest'>Newest</option>
+            <option value='oldest'>Oldest</option>
+            <option value='price_low'>Price: Low</option>
+            <option value='price_high'>Price: High</option>
+          </select>
+          <span className='absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-primary-800 dark:text-purple-300'>
+            ▾
+          </span>
         </div>
       </div>
 

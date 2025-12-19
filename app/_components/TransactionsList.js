@@ -14,7 +14,7 @@ const TIME_FILTER_MONTHS = {
 
 const PER_PAGE = 10;
 
-async function TransactionsList({ filter, user, timeFilter, search, startDate, endDate, page = 1 }) {
+async function TransactionsList({ filter, user, timeFilter, search, startDate, endDate, page = 1, sort = 'newest' }) {
   const transactions = await getTransactionsByUser(user);
   if (!transactions.length) return null;
 
@@ -63,11 +63,20 @@ async function TransactionsList({ filter, user, timeFilter, search, startDate, e
     return true;
   });
 
+  // Sort transactions
+  const sortedTransactions = [...filteredTransactions].sort((a, b) => {
+    if (sort === 'price_low') return a.price - b.price;
+    if (sort === 'price_high') return b.price - a.price;
+    const dateA = new Date(a.created_at);
+    const dateB = new Date(b.created_at);
+    return sort === 'newest' ? dateB - dateA : dateA - dateB;
+  });
+
   // Pagination
-  const totalPages = Math.ceil(filteredTransactions.length / PER_PAGE);
+  const totalPages = Math.ceil(sortedTransactions.length / PER_PAGE);
   const currentPage = Math.min(Math.max(1, page), totalPages || 1);
   const startIndex = (currentPage - 1) * PER_PAGE;
-  const paginatedTransactions = filteredTransactions.slice(startIndex, startIndex + PER_PAGE);
+  const paginatedTransactions = sortedTransactions.slice(startIndex, startIndex + PER_PAGE);
 
   return (
     <div>
