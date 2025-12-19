@@ -3,6 +3,7 @@ import { getTransactionsByUser } from '../_lib/data-service';
 import { handlerCategory } from '../_utils/categoryUtils';
 import MessageToUser from './MessageToUser';
 import Transaction from './Transaction';
+import Pagination from './Pagination';
 
 const TIME_FILTER_MONTHS = {
   lastMonth: 0,
@@ -11,7 +12,9 @@ const TIME_FILTER_MONTHS = {
   lastYear: 12,
 };
 
-async function TransactionsList({ filter, user, timeFilter, search, startDate, endDate }) {
+const PER_PAGE = 10;
+
+async function TransactionsList({ filter, user, timeFilter, search, startDate, endDate, page = 1 }) {
   const transactions = await getTransactionsByUser(user);
   if (!transactions.length) return null;
 
@@ -60,20 +63,29 @@ async function TransactionsList({ filter, user, timeFilter, search, startDate, e
     return true;
   });
 
+  // Pagination
+  const totalPages = Math.ceil(filteredTransactions.length / PER_PAGE);
+  const currentPage = Math.min(Math.max(1, page), totalPages || 1);
+  const startIndex = (currentPage - 1) * PER_PAGE;
+  const paginatedTransactions = filteredTransactions.slice(startIndex, startIndex + PER_PAGE);
+
   return (
     <div>
-      {filteredTransactions.length ? (
-        filteredTransactions.map((e) => (
-          <Transaction
-            category={e?.category}
-            price={e?.price}
-            type={e?.type}
-            id={e?.id}
-            date={e?.created_at}
-            notes={e?.notes}
-            key={e.id}
-          />
-        ))
+      {paginatedTransactions.length ? (
+        <>
+          {paginatedTransactions.map((e) => (
+            <Transaction
+              category={e?.category}
+              price={e?.price}
+              type={e?.type}
+              id={e?.id}
+              date={e?.created_at}
+              notes={e?.notes}
+              key={e.id}
+            />
+          ))}
+          <Pagination totalPages={totalPages} currentPage={currentPage} />
+        </>
       ) : (
         <MessageToUser>
           No transactions found {search ? `matching "${search}"` : ''} 🔍

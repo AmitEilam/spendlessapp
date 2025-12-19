@@ -51,6 +51,7 @@ function Filter() {
         } else {
           params.delete('search');
         }
+        params.delete('page'); // Reset to page 1 when search changes
         router.replace(`${pathname}?${params.toString()}`, { scroll: false });
       }
     }, 300);
@@ -64,6 +65,7 @@ function Filter() {
     } else {
       params.delete(key);
     }
+    params.delete('page'); // Reset to page 1 when filters change
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   }
 
@@ -80,6 +82,7 @@ function Filter() {
       params.set('timeFilter', timeFilter);
       params.delete('startDate');
       params.delete('endDate');
+      params.delete('page');
       router.replace(`${pathname}?${params.toString()}`, { scroll: false });
     }
     updateParams('timeFilter', timeFilter);
@@ -107,6 +110,7 @@ function Filter() {
     const params = new URLSearchParams(searchParams);
     params.delete('startDate');
     params.delete('endDate');
+    params.delete('page');
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   }
 
