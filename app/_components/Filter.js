@@ -15,8 +15,20 @@ function Filter() {
   const startDate = searchParams.get('startDate') ?? '';
   const endDate = searchParams.get('endDate') ?? '';
 
-  const [showCustomDates, setShowCustomDates] = useState(activeTimeFilter === 'custom');
+  const [showCustomDates, setShowCustomDates] = useState(false);
   const [searchInput, setSearchInput] = useState(searchQuery);
+
+  // Reset custom dates on page load
+  useEffect(() => {
+    if (startDate || endDate || activeTimeFilter === 'custom') {
+      const params = new URLSearchParams(searchParams);
+      params.delete('startDate');
+      params.delete('endDate');
+      params.set('timeFilter', 'lastMonth');
+      router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Debounce search - only update URL after 300ms of no typing
   useEffect(() => {
@@ -69,6 +81,15 @@ function Filter() {
   function clearSearch() {
     setSearchInput('');
   }
+
+  function clearDates() {
+    const params = new URLSearchParams(searchParams);
+    params.delete('startDate');
+    params.delete('endDate');
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+  }
+
+  const today = new Date().toISOString().split('T')[0];
 
   return (
     <div className='flex flex-col w-full'>
@@ -129,12 +150,13 @@ function Filter() {
 
       {/* Custom Date Range */}
       {showCustomDates && (
-        <div className='flex flex-wrap gap-2 p-2'>
+        <div className='flex flex-wrap items-center gap-2 p-2'>
           <div className='flex items-center gap-2'>
             <label className='text-xs text-gray-600 dark:text-gray-400'>From:</label>
             <input
               type='date'
               value={startDate}
+              max={endDate || today}
               onChange={(e) => handleDateChange('startDate', e.target.value)}
               className='px-2 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100'
             />
@@ -144,10 +166,21 @@ function Filter() {
             <input
               type='date'
               value={endDate}
+              min={startDate}
+              max={today}
               onChange={(e) => handleDateChange('endDate', e.target.value)}
               className='px-2 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100'
             />
           </div>
+          {(startDate || endDate) && (
+            <button
+              type='button'
+              onClick={clearDates}
+              className='px-3 py-1 text-xs text-gray-500 dark:text-gray-400 active:text-red-500 dark:active:text-red-400 hover:text-red-500 dark:hover:text-red-400 touch-manipulation'
+            >
+              Reset
+            </button>
+          )}
         </div>
       )}
     </div>
