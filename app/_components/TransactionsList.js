@@ -1,5 +1,6 @@
-import { startOfMonth, subMonths } from 'date-fns';
+import { startOfMonth, subMonths, startOfDay, endOfDay } from 'date-fns';
 import { getTransactionsByUser } from '../_lib/data-service';
+import { handlerCategory } from '../_utils/categoryUtils';
 import MessageToUser from './MessageToUser';
 import Transaction from './Transaction';
 
@@ -10,33 +11,52 @@ const TIME_FILTER_MONTHS = {
   lastYear: 12,
 };
 
-async function TransactionsList({ filter, user, timeFilter }) {
+async function TransactionsList({ filter, user, timeFilter, search, startDate, endDate }) {
   const transactions = await getTransactionsByUser(user);
   if (!transactions.length) return null;
 
   const now = new Date();
+  const searchLower = search?.toLowerCase() ?? '';
 
-  // Calculate the cutoff date once based on timeFilter
+  // Calculate the cutoff date based on timeFilter (unless custom)
   let cutoffDate;
-  if (timeFilter === 'lastMonth') {
+  let customStart;
+  let customEnd;
+
+  if (timeFilter === 'custom') {
+    customStart = startDate ? startOfDay(new Date(startDate)) : null;
+    customEnd = endDate ? endOfDay(new Date(endDate)) : null;
+  } else if (timeFilter === 'lastMonth') {
     cutoffDate = startOfMonth(now);
   } else if (TIME_FILTER_MONTHS[timeFilter] !== undefined) {
     cutoffDate = subMonths(now, TIME_FILTER_MONTHS[timeFilter]);
   }
 
-  // Apply both filters in a single pass
+  // Apply all filters in a single pass
   const filteredTransactions = transactions.filter((trans) => {
-    // Time filter
-    if (cutoffDate && new Date(trans.created_at) < cutoffDate) {
-      return false;
+    const transDate = new Date(trans.created_at);
+
+    // Custom date range filter
+    if (timeFilter === 'custom') {
+      if (customStart && transDate < customStart) return false;
+      if (customEnd && transDate > customEnd) return false;
+    } else {
+      // Standard time filter
+      if (cutoffDate && transDate < cutoffDate) return false;
     }
+
     // Type filter
-    if (filter === 'expenses' && trans.type !== 'expense') {
-      return false;
+    if (filter === 'expenses' && trans.type !== 'expense') return false;
+    if (filter === 'income' && trans.type !== 'income') return false;
+
+    // Search filter
+    if (searchLower) {
+      const { title } = handlerCategory(trans.category, 'transaction');
+      const titleMatch = title.toLowerCase().includes(searchLower);
+      const notesMatch = trans.notes?.toLowerCase().includes(searchLower);
+      if (!titleMatch && !notesMatch) return false;
     }
-    if (filter === 'income' && trans.type !== 'income') {
-      return false;
-    }
+
     return true;
   });
 
@@ -56,8 +76,7 @@ async function TransactionsList({ filter, user, timeFilter }) {
         ))
       ) : (
         <MessageToUser>
-          There is no {filter} transactions yet{' '}
-          {filter === 'income' ? '😥' : '😎'}
+          No transactions found {search ? `matching "${search}"` : ''} 🔍
         </MessageToUser>
       )}
     </div>

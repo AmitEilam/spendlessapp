@@ -1,5 +1,6 @@
 'use client';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useState, useEffect } from 'react';
 import FilterBtn from './FilterBtn';
 import FilterTimeBtn from './FilterTimeBtn';
 
@@ -10,77 +11,145 @@ function Filter() {
 
   const activeFilter = searchParams.get('filter') ?? 'all';
   const activeTimeFilter = searchParams.get('timeFilter') ?? 'lastMonth';
+  const searchQuery = searchParams.get('search') ?? '';
+  const startDate = searchParams.get('startDate') ?? '';
+  const endDate = searchParams.get('endDate') ?? '';
 
-  function handleFilter(filter) {
+  const [showCustomDates, setShowCustomDates] = useState(activeTimeFilter === 'custom');
+  const [searchInput, setSearchInput] = useState(searchQuery);
+
+  // Debounce search - only update URL after 300ms of no typing
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (searchInput !== searchQuery) {
+        const params = new URLSearchParams(searchParams);
+        if (searchInput) {
+          params.set('search', searchInput);
+        } else {
+          params.delete('search');
+        }
+        router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+      }
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [searchInput, searchQuery, searchParams, router, pathname]);
+
+  function updateParams(key, value) {
     const params = new URLSearchParams(searchParams);
-    params.set('filter', filter);
+    if (value) {
+      params.set(key, value);
+    } else {
+      params.delete(key);
+    }
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   }
+
+  function handleFilter(filter) {
+    updateParams('filter', filter);
+  }
+
   function handleTimeFilter(timeFilter) {
-    const params = new URLSearchParams(searchParams);
-    params.set('timeFilter', timeFilter);
-    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+    if (timeFilter === 'custom') {
+      setShowCustomDates(true);
+    } else {
+      setShowCustomDates(false);
+      const params = new URLSearchParams(searchParams);
+      params.set('timeFilter', timeFilter);
+      params.delete('startDate');
+      params.delete('endDate');
+      router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+    }
+    updateParams('timeFilter', timeFilter);
+  }
+
+  function handleDateChange(key, value) {
+    updateParams(key, value);
+  }
+
+  function clearSearch() {
+    setSearchInput('');
   }
 
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col w-full'>
+      {/* Search Input */}
+      <div className='relative p-2'>
+        <input
+          type='text'
+          placeholder='Search transactions...'
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
+          className='w-full px-4 py-2 pr-10 text-sm border border-gray-300 dark:border-gray-600 rounded-full bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-800 dark:focus:ring-purple-400'
+        />
+        {searchInput && (
+          <button
+            onClick={clearSearch}
+            className='absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200'
+          >
+            ✕
+          </button>
+        )}
+      </div>
+
+      {/* Type Filter */}
       <div className='flex justify-between items-center'>
         <div className='flex space-x-2 p-2'>
-          <FilterBtn
-            filter='all'
-            handleFilter={handleFilter}
-            activeFilter={activeFilter}
-          >
+          <FilterBtn filter='all' handleFilter={handleFilter} activeFilter={activeFilter}>
             All
           </FilterBtn>
-          <FilterBtn
-            filter='expenses'
-            handleFilter={handleFilter}
-            activeFilter={activeFilter}
-          >
+          <FilterBtn filter='expenses' handleFilter={handleFilter} activeFilter={activeFilter}>
             Expenses
           </FilterBtn>
-          <FilterBtn
-            filter='income'
-            handleFilter={handleFilter}
-            activeFilter={activeFilter}
-          >
+          <FilterBtn filter='income' handleFilter={handleFilter} activeFilter={activeFilter}>
             Income
           </FilterBtn>
         </div>
       </div>
-      <div className='flex justify-between items-center'>
-        <div className='flex space-x-1 md:space-x-2 p-1 md:p-2'>
-          <FilterTimeBtn
-            filter='lastMonth'
-            handleTimeFilter={handleTimeFilter}
-            activeTimeFilter={activeTimeFilter}
-          >
-            Last Month
+
+      {/* Time Filter */}
+      <div className='flex flex-wrap items-center'>
+        <div className='flex flex-wrap gap-1 p-1 md:p-2'>
+          <FilterTimeBtn filter='lastMonth' handleTimeFilter={handleTimeFilter} activeTimeFilter={activeTimeFilter}>
+            Month
           </FilterTimeBtn>
-          <FilterTimeBtn
-            filter='last3Month'
-            handleTimeFilter={handleTimeFilter}
-            activeTimeFilter={activeTimeFilter}
-          >
-            Last 3 Month
+          <FilterTimeBtn filter='last3Month' handleTimeFilter={handleTimeFilter} activeTimeFilter={activeTimeFilter}>
+            3M
           </FilterTimeBtn>
-          <FilterTimeBtn
-            filter='last6Month'
-            handleTimeFilter={handleTimeFilter}
-            activeTimeFilter={activeTimeFilter}
-          >
-            Last 6 Month
+          <FilterTimeBtn filter='last6Month' handleTimeFilter={handleTimeFilter} activeTimeFilter={activeTimeFilter}>
+            6M
           </FilterTimeBtn>
-          <FilterTimeBtn
-            filter='lastYear'
-            handleTimeFilter={handleTimeFilter}
-            activeTimeFilter={activeTimeFilter}
-          >
-            Last year
+          <FilterTimeBtn filter='lastYear' handleTimeFilter={handleTimeFilter} activeTimeFilter={activeTimeFilter}>
+            Year
+          </FilterTimeBtn>
+          <FilterTimeBtn filter='custom' handleTimeFilter={handleTimeFilter} activeTimeFilter={activeTimeFilter}>
+            Custom
           </FilterTimeBtn>
         </div>
       </div>
+
+      {/* Custom Date Range */}
+      {showCustomDates && (
+        <div className='flex flex-wrap gap-2 p-2'>
+          <div className='flex items-center gap-2'>
+            <label className='text-xs text-gray-600 dark:text-gray-400'>From:</label>
+            <input
+              type='date'
+              value={startDate}
+              onChange={(e) => handleDateChange('startDate', e.target.value)}
+              className='px-2 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100'
+            />
+          </div>
+          <div className='flex items-center gap-2'>
+            <label className='text-xs text-gray-600 dark:text-gray-400'>To:</label>
+            <input
+              type='date'
+              value={endDate}
+              onChange={(e) => handleDateChange('endDate', e.target.value)}
+              className='px-2 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100'
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

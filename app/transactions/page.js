@@ -18,6 +18,9 @@ export default async function Page({ searchParams }) {
   const transactions = await getTransactionsByUser(userId);
   const filter = searchParams?.filter ?? 'all';
   const timeFilter = searchParams?.timeFilter ?? 'lastMonth';
+  const search = searchParams?.search ?? '';
+  const startDate = searchParams?.startDate ?? '';
+  const endDate = searchParams?.endDate ?? '';
 
   return (
     <>
@@ -37,10 +40,13 @@ export default async function Page({ searchParams }) {
           <div className='flex justify-between max-w-2xl mx-auto items-center'>
             <Filter />
           </div>
-          <Suspense fallback={<Spinner />} key={`${filter}-${timeFilter}`}>
+          <Suspense fallback={<Spinner />} key={`${filter}-${timeFilter}-${search}-${startDate}-${endDate}`}>
             <TransactionsList
               filter={filter}
               timeFilter={timeFilter}
+              search={search}
+              startDate={startDate}
+              endDate={endDate}
               user={userId}
             />
           </Suspense>
