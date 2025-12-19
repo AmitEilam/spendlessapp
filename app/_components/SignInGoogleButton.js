@@ -18,11 +18,11 @@ function SignInGoogleButton() {
 
   if (inAppBrowser) {
     return (
-      <div className='flex items-center min-w-[280px] sm:text-lg text-sm border border-primary-300 dark:border-gray-600 px-6 py-4 font-medium rounded-full bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-300'>
+      <div className='flex items-center min-w-[280px] sm:text-lg text-sm border-2 border-dashed border-gray-300 dark:border-gray-500 px-6 py-4 font-medium rounded-full bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 cursor-not-allowed opacity-70'>
         <img
           src='https://authjs.dev/img/providers/google.svg'
           alt='Google logo'
-          className='h-6 w-6 opacity-50'
+          className='h-6 w-6 opacity-30 grayscale'
         />
         <span className='flex-1 text-center text-sm'>Open in your browser to<br />continue with Google</span>
       </div>
