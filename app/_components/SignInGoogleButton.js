@@ -24,7 +24,7 @@ function SignInGoogleButton() {
           alt='Google logo'
           className='h-6 w-6 opacity-50'
         />
-        <span className='flex-1 text-center text-sm'>Open in your browser to continue with Google</span>
+        <span className='flex-1 text-center text-sm'>Open in your browser to<br />continue with Google</span>
       </div>
     );
   }
