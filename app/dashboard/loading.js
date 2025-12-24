@@ -1,5 +1,4 @@
 import {
-  BalanceSkeleton,
   ChartSkeleton,
   StatsSkeleton,
 } from '@/app/_components/Skeleton';
@@ -13,14 +12,11 @@ export default function Loading() {
         <Skeleton className='w-48 h-7' />
       </div>
 
-      {/* Balance summary skeleton */}
-      <BalanceSkeleton />
-
       <div className='flex flex-col text-center'>
         {/* Chart title */}
         <Skeleton className='w-64 h-5 mx-auto mb-2' />
 
-        {/* Chart skeleton */}
+        {/* Chart skeleton (includes pie chart + summary cards) */}
         <ChartSkeleton />
 
         {/* Expenses section */}

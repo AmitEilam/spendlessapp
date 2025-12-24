@@ -45,15 +45,39 @@ export function BalanceSkeleton() {
   );
 }
 
-// Chart skeleton for dashboard
+// Chart skeleton for dashboard - matches new pie chart + cards layout
 export function ChartSkeleton() {
   return (
-    <div className='flex justify-center mb-12 mt-3'>
-      <div className='w-[70%] h-[300px] bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4'>
-        <div className='flex items-end justify-center gap-8 h-full'>
-          <Skeleton className='w-16 h-[60%]' />
-          <Skeleton className='w-16 h-[80%]' />
+    <div className='flex flex-col md:flex-row gap-6 mb-12 mt-3 items-center md:items-start justify-center'>
+      {/* Pie Chart Skeleton - Second on mobile, first on desktop */}
+      <div className='flex-shrink-0 order-2 md:order-1'>
+        <div className='w-[300px] h-[300px] bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 flex items-center justify-center'>
+          <div className='relative w-full h-full'>
+            {/* Donut chart skeleton */}
+            <div className='absolute inset-0 flex items-center justify-center'>
+              <Skeleton className='w-[200px] h-[200px] rounded-full' />
+              <Skeleton className='absolute w-[120px] h-[120px] rounded-full bg-gray-100 dark:bg-gray-900' />
+            </div>
+          </div>
         </div>
+      </div>
+
+      {/* Summary Cards Skeleton - First on mobile, second on desktop */}
+      <div className='grid grid-cols-1 md:grid-cols-1 gap-4 max-w-sm w-full order-1 md:order-2'>
+        {[1, 2, 3].map((i) => (
+          <div
+            key={i}
+            className='bg-white dark:bg-gray-800 rounded-xl p-5 shadow-md border border-gray-200 dark:border-gray-700'
+          >
+            <div className='flex items-center justify-between'>
+              <div className='flex-1'>
+                <Skeleton className='w-24 h-4 mb-2' />
+                <Skeleton className='w-32 h-7' />
+              </div>
+              <Skeleton className='w-12 h-12 rounded-full' />
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
