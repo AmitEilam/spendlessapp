@@ -4,9 +4,12 @@ import { NextResponse } from 'next/server';
 export async function GET(request) {
   try {
     // Security: Check for Authorization Bearer token (Vercel Cron pattern)
-    if (request.headers.get('Authorization') !== `Bearer ${process.env.CRON_SECRET}`) {
+    const authHeader = request.headers.get('Authorization');
+    const expectedAuth = `Bearer ${process.env.CRON_SECRET}`;
+    
+    if (!authHeader || authHeader !== expectedAuth) {
       return NextResponse.json(
-        { ok: false, error: 'Unauthorized' },
+        { ok: false, error: 'Unauthorized', received: authHeader ? 'present' : 'missing' },
         { status: 401 }
       );
     }
