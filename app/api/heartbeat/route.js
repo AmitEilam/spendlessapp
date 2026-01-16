@@ -38,15 +38,52 @@ export async function GET(request) {
     });
 
     // Run minimal query against transactions table
-    const { data, error } = await supabase
+    const { data: selectData, error: selectError } = await supabase
       .from('transactions')
       .select('id')
       .limit(1);
 
-    if (error) {
-      console.error('Heartbeat query error:', error);
+    if (selectError) {
+      console.error('Heartbeat SELECT error:', selectError);
       return NextResponse.json(
-        { ok: false, error: error.message },
+        { ok: false, error: selectError.message },
+        { status: 500 }
+      );
+    }
+
+    // Insert a test transaction to exercise INSERT operation
+    const testTransaction = {
+      userId: 'heartbeat-system',
+      type: 'expense',
+      category: 'other',
+      price: 1,
+      notes: 'HEARTBEAT_TEST_DELETE_ME'
+    };
+
+    const { data: insertData, error: insertError } = await supabase
+      .from('transactions')
+      .insert([testTransaction])
+      .select('id')
+      .single();
+
+    if (insertError) {
+      console.error('Heartbeat INSERT error:', insertError);
+      return NextResponse.json(
+        { ok: false, error: insertError.message },
+        { status: 500 }
+      );
+    }
+
+    // Delete the test transaction to exercise DELETE operation
+    const { error: deleteError } = await supabase
+      .from('transactions')
+      .delete()
+      .eq('id', insertData.id);
+
+    if (deleteError) {
+      console.error('Heartbeat DELETE error:', deleteError);
+      return NextResponse.json(
+        { ok: false, error: deleteError.message },
         { status: 500 }
       );
     }
@@ -55,6 +92,7 @@ export async function GET(request) {
     return NextResponse.json({
       ok: true,
       ts: new Date().toISOString(),
+      operations: ['SELECT', 'INSERT', 'DELETE']
     });
   } catch (error) {
     console.error('Heartbeat endpoint error:', error);
