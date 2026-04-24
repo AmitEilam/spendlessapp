@@ -72,14 +72,20 @@ function Chart({ expense, income, fixedExpense, fixedIncome }) {
                 stroke: darkMode ? '#9ca3af' : '#6b7280',
                 strokeWidth: 1,
               }}
-              label={({ percent }) => {
-                if (percent < 0.05) return null; // Don't show label if segment is too small
-                return `${(percent * 100).toFixed(1)}%`;
-              }}
-              labelStyle={{
-                fill: labelColor,
-                fontSize: 14,
-                fontWeight: 600,
+              label={({ percent, x, y, textAnchor }) => {
+                if (percent < 0.05) return null;
+                return (
+                  <text
+                    x={x}
+                    y={y}
+                    textAnchor={textAnchor}
+                    fill={labelColor}
+                    fontSize={14}
+                    fontWeight={600}
+                  >
+                    {`${(percent * 100).toFixed(1)}%`}
+                  </text>
+                );
               }}
               outerRadius={100}
               innerRadius={40}
